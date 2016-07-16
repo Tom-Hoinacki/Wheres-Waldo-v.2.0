@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>37BA62A2-B298-468B-B4B4-7D1B934F1B45</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3273320561B72F8349536C5FF6F5CA4A28C83FD7</key>
+		<string>https://github.com/Tom-Hoinacki/wheres-waldo-v.1.2.git</string>
+		<key>8A47E08B8905D09896F8FFE190E5E8EA196D7D53</key>
+		<string>https://github.com/Tom-Hoinacki/wheres-waldo-v.2.0.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Wheres-Waldo-v.2.0.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3273320561B72F8349536C5FF6F5CA4A28C83FD7</key>
+		<string>../../../Waldo%20v1.2</string>
+		<key>8A47E08B8905D09896F8FFE190E5E8EA196D7D53</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Tom-Hoinacki/wheres-waldo-v.2.0.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8A47E08B8905D09896F8FFE190E5E8EA196D7D53</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3273320561B72F8349536C5FF6F5CA4A28C83FD7</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Waldo%20v1.2</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8A47E08B8905D09896F8FFE190E5E8EA196D7D53</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Wheres-Waldo-v.2.0</string>
+		</dict>
+	</array>
+</dict>
+</plist>

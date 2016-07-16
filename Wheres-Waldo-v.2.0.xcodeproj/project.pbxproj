@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		65EB60C21D3A3AE2001A4FB6 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 65EB60C11D3A3AE2001A4FB6 /* main.c */; };
-		65EB60CA1D3A3B3F001A4FB6 /* tree_creator.c in Sources */ = {isa = PBXBuildFile; fileRef = 65EB60C81D3A3B3F001A4FB6 /* tree_creator.c */; };
-		65EB60CC1D3A3B54001A4FB6 /* level1.c in Sources */ = {isa = PBXBuildFile; fileRef = 65EB60CB1D3A3B54001A4FB6 /* level1.c */; };
-		65EB60CF1D3A3B68001A4FB6 /* sightings_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 65EB60CE1D3A3B68001A4FB6 /* sightings_log.c */; };
+		65EB60D31D3A3D13001A4FB6 /* level1.c in Sources */ = {isa = PBXBuildFile; fileRef = 65EB60D11D3A3D13001A4FB6 /* level1.c */; };
+		65EB60D61D3A3D70001A4FB6 /* tree_creator.c in Sources */ = {isa = PBXBuildFile; fileRef = 65EB60D41D3A3D70001A4FB6 /* tree_creator.c */; };
+		65EB60D91D3A3DF5001A4FB6 /* sightings_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 65EB60D71D3A3DF5001A4FB6 /* sightings_log.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,12 +28,12 @@
 /* Begin PBXFileReference section */
 		65EB60BE1D3A3AE2001A4FB6 /* Wheres-Waldo-v.2.0 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Wheres-Waldo-v.2.0"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65EB60C11D3A3AE2001A4FB6 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		65EB60C81D3A3B3F001A4FB6 /* tree_creator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tree_creator.c; path = "../../Waldo v1.2/tree_creator.c"; sourceTree = "<group>"; };
-		65EB60C91D3A3B3F001A4FB6 /* tree_creator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tree_creator.h; path = "../../Waldo v1.2/tree_creator.h"; sourceTree = "<group>"; };
-		65EB60CB1D3A3B54001A4FB6 /* level1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = level1.c; path = "../../Waldo v1.2/Waldo v1.2/level1.c"; sourceTree = "<group>"; };
-		65EB60CD1D3A3B68001A4FB6 /* level1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = level1.h; path = "../../Waldo v1.2/Waldo v1.2/level1.h"; sourceTree = "<group>"; };
-		65EB60CE1D3A3B68001A4FB6 /* sightings_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sightings_log.c; path = "../../Waldo v1.2/Waldo v1.2/sightings_log.c"; sourceTree = "<group>"; };
-		65EB60D01D3A3B7C001A4FB6 /* sightings_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sightings_log.h; path = "../../Waldo v1.2/Waldo v1.2/sightings_log.h"; sourceTree = "<group>"; };
+		65EB60D11D3A3D13001A4FB6 /* level1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = level1.c; sourceTree = "<group>"; };
+		65EB60D21D3A3D13001A4FB6 /* level1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = level1.h; sourceTree = "<group>"; };
+		65EB60D41D3A3D70001A4FB6 /* tree_creator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tree_creator.c; sourceTree = "<group>"; };
+		65EB60D51D3A3D70001A4FB6 /* tree_creator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tree_creator.h; sourceTree = "<group>"; };
+		65EB60D71D3A3DF5001A4FB6 /* sightings_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sightings_log.c; sourceTree = "<group>"; };
+		65EB60D81D3A3DF5001A4FB6 /* sightings_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sightings_log.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,13 +66,13 @@
 		65EB60C01D3A3AE2001A4FB6 /* Wheres-Waldo-v.2.0 */ = {
 			isa = PBXGroup;
 			children = (
-				65EB60D01D3A3B7C001A4FB6 /* sightings_log.h */,
-				65EB60CD1D3A3B68001A4FB6 /* level1.h */,
-				65EB60CE1D3A3B68001A4FB6 /* sightings_log.c */,
-				65EB60CB1D3A3B54001A4FB6 /* level1.c */,
-				65EB60C81D3A3B3F001A4FB6 /* tree_creator.c */,
-				65EB60C91D3A3B3F001A4FB6 /* tree_creator.h */,
 				65EB60C11D3A3AE2001A4FB6 /* main.c */,
+				65EB60D11D3A3D13001A4FB6 /* level1.c */,
+				65EB60D21D3A3D13001A4FB6 /* level1.h */,
+				65EB60D41D3A3D70001A4FB6 /* tree_creator.c */,
+				65EB60D51D3A3D70001A4FB6 /* tree_creator.h */,
+				65EB60D71D3A3DF5001A4FB6 /* sightings_log.c */,
+				65EB60D81D3A3DF5001A4FB6 /* sightings_log.h */,
 			);
 			path = "Wheres-Waldo-v.2.0";
 			sourceTree = "<group>";
@@ -133,9 +133,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65EB60CA1D3A3B3F001A4FB6 /* tree_creator.c in Sources */,
-				65EB60CF1D3A3B68001A4FB6 /* sightings_log.c in Sources */,
-				65EB60CC1D3A3B54001A4FB6 /* level1.c in Sources */,
+				65EB60D61D3A3D70001A4FB6 /* tree_creator.c in Sources */,
+				65EB60D91D3A3DF5001A4FB6 /* sightings_log.c in Sources */,
+				65EB60D31D3A3D13001A4FB6 /* level1.c in Sources */,
 				65EB60C21D3A3AE2001A4FB6 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
