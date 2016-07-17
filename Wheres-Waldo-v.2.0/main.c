@@ -23,7 +23,8 @@
 
 // Application Headers
 #include "level1.h"
-#include "tree_creator.h"git
+#include "tree_creator.h"
+#include "tree_creator_breadth_first.h"
 #include "sightings_log.h"
 
 
@@ -76,26 +77,28 @@ int main(int argc, const char * argv[])
          * RANDOM 1/100 CHANCE STRING "Waldo" IS INSERTED AFTER EACH WORD STREAMED AND PRINTED INTO EACH TEXT FILE
          /*********************************************************************************************************/
         
-        create_random_asym_dir_tree(dirPathLvl1, loremIpsumFilePath);
+        //create_random_asym_dir_tree(dirPathLvl1, loremIpsumFilePath);
+        create_breadth_first_random_asym_dir_tree(dirPathLvl1, loremIpsumFilePath);
+
         
         
         
         /* LOG ALL WALDO SIGHTINGS BY TRAVERSING ASYMMETRIC TREE DEPTH FIRST, STRING SEARCH EACH TEXT FILE FOR "Waldo" OCCURENCES */
         /**************************************************************************************************************************/
         
-        // Create log file, make writable
-        FILE * sightingsLogFile = fopen(sightingsLogPath, "w");
-        
-        if (sightingsLogFile == NULL)
-        {
-            fprintf(stderr, "Error: Failed to open sightingsLogFile - %s\n", strerror(errno));
-            return 1;
-        }
-        
-        // Traverse tree depth-first string searching one text file at a time and logging sightings
-        int sightingsCount = 1;
-        log_waldo_sightings_dir(dirPathLvl1, sightingsLogFile, &sightingsCount);
-        fclose(sightingsLogFile);
+//        // Create log file, make writable
+//        FILE * sightingsLogFile = fopen(sightingsLogPath, "w");
+//        
+//        if (sightingsLogFile == NULL)
+//        {
+//            fprintf(stderr, "Error: Failed to open sightingsLogFile - %s\n", strerror(errno));
+//            return 1;
+//        }
+//        
+//        // Traverse tree depth-first string searching one text file at a time and logging sightings
+//        int sightingsCount = 1;
+//        log_waldo_sightings_dir(dirPathLvl1, sightingsLogFile, &sightingsCount);
+//        fclose(sightingsLogFile);
     }
     else
     {
