@@ -46,12 +46,12 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremI
         /*****************************************/
     
         // Initialize directory path variables
-        const int WALDO_DIR_NAME_LEN = 11;
+        const int WALDO_DIR_NAME_LEN = 13;
         
         char * const WALDO_DIR_NAME_FORMAT = (char *)malloc(strlen(1 + "%s/Level %d-%d"));
         strcpy(WALDO_DIR_NAME_FORMAT, "%s/Level %d-%d");
         
-        char * const WALDO_FILE_NAME_FORMAT = (char *)malloc(strlen(1 + "%s/File %d.txt"));
+        char * const WALDO_FILE_NAME_FORMAT = (char *)malloc(strlen(1 + "%s/W_File %d.txt"));
         strcpy(WALDO_FILE_NAME_FORMAT, "%s/File %d.txt");
     
 
@@ -61,13 +61,20 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremI
     
         // Initialize children directory level counters for how many children directory
         //left to create at that level (random 1-3 for Level 2, random 0-3 for Levels 3 & 4)
-        int mkDirCount = rand() % 3 + 1;
+        // int mkDirCount = rand() % 3 + 1;
+        int mkDirCount= 3;
+        int dirsToCreate = mkDirCount;
+    
+        int childCounter = 0;
+    
     
         int lvlNum = 2;// Initilaize number for first child directory level 2, used for creating path strings
         int createNextLevel = 1; // Initialize flag for whether to create next level down
         int dirNum; // Initialize number of current child directory being created
-        char * newDirPath; // Initialize new directory path
-        char * newFilePath;  // Initialize new file path
+        char * newDirPath = (char *)malloc(PATH_MAX);; // Initialize new directory path
+        char * newFilePath = (char *)malloc(PATH_MAX);;  // Initialize new file path
+        char * tempDirPath = (char *)malloc(PATH_MAX); // Initialize directory path temp
+    
 
         // Create empty linked list
         //http://www.macs.hw.ac.uk/~rjp/Coursewww/Cwww/linklist.html
@@ -81,12 +88,18 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremI
     
         dirLvlList * parentCurr, * parentHead;
         dirLvlList * childCurr, * childHead;
+        dirLvlList * nextElm;
     
-        parentCurr = (dirLvlList *)malloc(sizeof(dirLvlList));
-        parentHead = (dirLvlList *)malloc(sizeof(dirLvlList));
+        parentCurr = (dirLvlList *)malloc(sizeof(*parentCurr));
+        parentHead = (dirLvlList *)malloc(sizeof(*parentHead));
     
-        childCurr = (dirLvlList *)malloc(sizeof(dirLvlList));
-        childHead = (dirLvlList *)malloc(sizeof(dirLvlList));
+        childCurr = (dirLvlList *)malloc(sizeof(*childCurr));
+        childHead = (dirLvlList *)malloc(sizeof(*childHead));
+    
+        int firstChild = 1;
+    
+        nextElm = (dirLvlList *)malloc(sizeof(*nextElm));
+
     
     
     
@@ -123,26 +136,35 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremI
                 {
                     
                     // Random get children to create, make current parent directory path and folder
-                    parentCurr->childDirToCreate = random() % 4;
+                    //parentCurr->childDirToCreate = random() % 4;
+                    parentCurr->childDirToCreate = 3;
                     
+                    newDirPath = (char *)malloc(PATH_MAX);
                     // Assign parent folder path
-                    newDirPath = (char *)malloc(strlen(1 + dirPathLvl1 + WALDO_DIR_NAME_LEN));
                     sprintf(newDirPath, WALDO_DIR_NAME_FORMAT, dirPathLvl1, lvlNum, dirNum++);
-                    parentCurr->path = newDirPath;
+                    
+                    char * pPath = (char *)malloc(PATH_MAX);
+                    strcpy(pPath, newDirPath);
+                    
+                    parentCurr->path = (char *)malloc(PATH_MAX);
+                    parentCurr->path = pPath;
                     
                     // Free temp char pointer to path string
                     free(newDirPath);
                     
                     
                     // If not last folder, initialize new linked list element
-                    if ((mkDirCount - i) > 1)
+                    if ((mkDirCount - i) > 0)
                     {
-                        parentCurr->next = (dirLvlList *)malloc(sizeof(dirLvlList));
+                        parentCurr->next = (dirLvlList *)malloc(sizeof(*parentCurr->next) + 1000);
                         
                         // If first element store in head
                         if (i == 0)
                         {
                             parentHead = parentCurr;
+                            char * pHeadPath = (char *)malloc(PATH_MAX);
+                            strcpy(pHeadPath, newDirPath);
+                            parentHead->path = pHeadPath;
                         }
                         
                         parentCurr = parentCurr->next;
@@ -152,6 +174,8 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremI
                         parentCurr->next = NULL;
                     }
                 }
+                
+                parentCurr = parentHead;
             }
          
             
@@ -166,7 +190,7 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremI
              * create and assign child directory level linked list to 
              * parent linked list before next level iteration of directory and text file creation
             /************************************************************************************/
-            while (parentCurr != NULL)
+            while (dirsToCreate > 0)
             {
                 
                 // Get random num 1-3 and create that number of empty text files in new directory
@@ -175,8 +199,11 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremI
                 // Create parent directory
                 mkdir(parentCurr->path, 0700);
                 
+                strcpy(newDirPath, parentCurr->path);
+                strcpy(tempDirPath, newDirPath);
+                
                 // Create rand 3 files, write to with text filler file and random "Waldo" insertions
-                create_rand3_file_num(newFilePath, parentCurr->path, loremIpsumFilePath, WALDO_FILE_NAME_FORMAT);
+                create_rand3_file_num(newFilePath, tempDirPath, loremIpsumFilePath, WALDO_FILE_NAME_FORMAT);
                 
                 
                 
@@ -208,33 +235,42 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremI
                         childCurr->childDirToCreate = random() % 4;
                         
                         // Assign path for child directory creation in next directory level iteration
-                        newDirPath = (char *)malloc(PATH_MAX);
+                        tempDirPath = (char *)malloc(PATH_MAX);
+                      
                         strcpy(newDirPath, parentCurr->path);
                         sprintf(newDirPath, WALDO_DIR_NAME_FORMAT, newDirPath, (lvlNum + 1), dirNum++);
-                        childCurr->path = newDirPath;
-                        free(newDirPath);
-                       
+                        
+                        strcpy(tempDirPath, newDirPath);
+                        childCurr->path = (char *)malloc(PATH_MAX);
+                        childCurr->path = tempDirPath;
+                        
+                        childCounter++;
                        
                         
                         // If first iteration assign child head as first element in list
-                        if (dirNum == 2)
+                        if (firstChild)
                         {
                             childHead = childCurr;
-                        }
-                        
-                        // If any children elements left to be created, initialize, allocate, point to next newly created list element
-                        if (parentCurr->childDirToCreate > 0)
-                        {
-                            childCurr->next = (dirLvlList *)malloc(sizeof(dirLvlList));
-                            childCurr = childCurr->next;
+                            firstChild = 0;
                         }
                         
                         parentCurr->childDirToCreate--;
+                        
+                        childCurr->next = (dirLvlList *)malloc(sizeof(*childCurr->next) + 10000);
+                        childCurr = childCurr->next;
+                        
+                        // If any children elements left to be created, initialize, allocate, point to next newly created list element
+                        //if (parentCurr->childDirToCreate > 0)
+                       // {
+//                            childCurr->next = (dirLvlList *)malloc(sizeof(*childCurr->next) + 1000);
+//                            childCurr = childCurr->next;
+                       // }
                     }
                 }
                 
                 // Point to next element in parent level linked list
                 parentCurr = parentCurr->next;
+                dirsToCreate--;
             }
             
             
@@ -247,20 +283,32 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremI
             // Set linked lists to point to first element
             parentCurr = parentHead;
             childCurr = childHead;
+            
+            // Set number of child directories to be made in the next level
+            dirsToCreate = childCounter;
+            
+            childCounter = 0;
+            firstChild = 1;
+
     
             // Assign child directory level linked list to parent level linked list before
             // next level iteration
-            while (childCurr != NULL)
+            while (childCurr->path != NULL)
             {
                 parentCurr->childDirToCreate = childCurr->childDirToCreate;
-                parentCurr->path = childCurr->path;
                 
-                // If the next parent element does not already exist, initialize, allocate memory
-                if (parentCurr->next == NULL)
+                tempDirPath = (char *)malloc(PATH_MAX);
+                strcpy(tempDirPath, childCurr->path);
+                parentCurr->path = tempDirPath;
+                
+                if (firstChild)
                 {
-                    parentCurr->next = (dirLvlList *)malloc(sizeof(dirLvlList));
+                    parentHead = parentCurr;
+                    firstChild = 0;
                 }
-
+                
+                parentCurr->next = (dirLvlList *)malloc(sizeof(*parentCurr->next) + 1000);
+                
                 // Point to next element in parent and child level linked lists
                 parentCurr = parentCurr->next;
                 childCurr = childCurr->next;
@@ -269,35 +317,25 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremI
             // Set parent linked list to first element to prepare for creating directories in next level iteration
             parentCurr = parentHead;
             
-            
-            // Free memory of child linked list
-            struct list_elm * next_child_elm = childHead;
-            
-            while (next_child_elm != NULL)
-            {
-                next_child_elm = childHead->next;
-                free(childHead);
-                childHead = next_child_elm;
-            }
-            
-            
-            // Reinitizalie child link list current and head, allocate memory for current directory level
-            childCurr = (dirLvlList *)malloc(sizeof(dirLvlList));
-            childHead = (dirLvlList *)malloc(sizeof(dirLvlList));
-    
+            firstChild = 1;
             lvlNum++;
-        }
+    }
     
     
     // Free parent and child linked list memory
-    free(childCurr);
-    free(childHead);
+    nextElm = childHead;
     
+    while (nextElm != NULL)
+    {
+        nextElm = childHead->next;
+        free(childHead);
+        childHead = nextElm;
+    }
     struct list_elm * next_parent_elm = parentHead;
     
     while (next_parent_elm != NULL)
     {
-        //next_parent_elm = parentHead->next;
+        next_parent_elm = parentHead->next;
         free(parentHead);
         parentHead = next_parent_elm;
     }
