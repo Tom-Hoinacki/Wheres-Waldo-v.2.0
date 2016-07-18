@@ -27,7 +27,7 @@
 
 
 // Function Signatures
-void create_random_asym_dir_tree(char * dirPathLvl1, char * loremIpsumFilePath);
+void create_depth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremIpsumFilePath);
 void create_rand3_file_num(char * newFilePath, char * newDirPath, char * loremPath, char * const format);
 
 
@@ -40,7 +40,7 @@ void create_rand3_file_num(char * newFilePath, char * newDirPath, char * loremPa
  * RANDOM BETWEEN 1-3 TEXT FILES IN EACH DIRECTORY CREATED
  * RANDOM 1/100 CHANCE STRING "Waldo" IS INSERTED AFTER EACH WORD STREAMED AND PRINTED INTO EACH TEXT FILE
  /*********************************************************************************************************/
-void create_random_asym_dir_tree(char * dirPathLvl1, char * loremIpsumFilePath)
+void create_depth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremIpsumFilePath)
 {
     
     // Initialize children directory path variables

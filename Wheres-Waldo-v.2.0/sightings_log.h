@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 
-void log_waldo_sightings_dir(char * dirPath, FILE * sightingsLogFile, int * sightingsCount);
+void log_waldo_sightings_dir_depth_first(char * dirPath, FILE * sightingsLogFile, int * sightingsCount);
 
 void log_waldo_sightings_txtfile(char * dirPath, struct dirent * in_Dir, FILE * sightingsLogFile, int * sightingsCount);
 

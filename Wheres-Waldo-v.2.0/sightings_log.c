@@ -23,14 +23,14 @@
 #include "sightings_log.h"
 
 //Function Signatures
-void log_waldo_sightings_dir(char * dirPath, FILE * sightingsLogFile, int * sightingsCount);
+void log_waldo_sightings_dir_depth_first(char * dirPath, FILE * sightingsLogFile, int * sightingsCount);
 void log_waldo_sightings_txtfile(char* dirPath, struct dirent* in_File, FILE * sightingsLogFile, int * sightingsCount);
 
 
 //Function Implementations
 
 /* Recursive method to search all text files for "Waldo" string depth-first */
-void log_waldo_sightings_dir(char * dirPath, FILE * sightingsLogFile, int * sightingsCount)
+void log_waldo_sightings_dir_depth_first(char * dirPath, FILE * sightingsLogFile, int * sightingsCount)
 {
     struct dirent * in_Dir;
     DIR * d;
@@ -63,7 +63,7 @@ void log_waldo_sightings_dir(char * dirPath, FILE * sightingsLogFile, int * sigh
         {
             strcat(childDirPath, "/");
             strcat(childDirPath, in_Dir->d_name);
-            log_waldo_sightings_dir(childDirPath, sightingsLogFile, sightingsCount);
+            log_waldo_sightings_dir_depth_first(childDirPath, sightingsLogFile, sightingsCount);
             strcpy(childDirPath, dirPath);
         }
     }

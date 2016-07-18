@@ -11,6 +11,6 @@
 
 #include <stdio.h>
 
-void create_random_asym_dir_tree(char * dirPathLvl1, char * loremIpsumFilePath);
+void create_depth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremIpsumFilePath);
 
 #endif

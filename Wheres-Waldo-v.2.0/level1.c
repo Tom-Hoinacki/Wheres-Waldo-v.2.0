@@ -25,9 +25,9 @@
 
 //Function Signatures
 void get_dir_lvl1_Path(char * cwd, char ** dirPathLvl1, int * pathLen);
-void check_to_remove_existing_waldo_directory(char * dirPathLvl1);
+void check_to_remove_existing_waldo_directories(char * dirPathLvl1_Breadth, char * dirPathLvl1_Depth);
 int remove_directory(const char *path);
-void create_sightings_log_file(char * dirPathLvl1, char ** sightingsLogPath, int pathLen);
+void create_sightings_log_file(char * dirPathLvl1, char ** sightingsLogPath, char * sightingsLogName, int pathLen);
 void create_text_filler_file(char * dirPathLvl1, char ** loremIpsumFilePath, int pathLen);
 
 
@@ -35,36 +35,54 @@ void create_text_filler_file(char * dirPathLvl1, char ** loremIpsumFilePath, int
 //Function Implementations
 
 /* Creates Waldo Level 1 folder */
-void get_dir_lvl1_Path(char * cwd, char ** dirPathLvl1, int * pathLen)
+void get_dir_lvl1_Paths(char * cwd, char ** dirPathLvl1_Breadth, char ** dirPathLvl1_Depth, int * pathLen)
 {
     // Initialize, allocate memory, assign name string
-    char * dirNameLvl1 = (char *)malloc(strlen(1 + "/Where's Waldo Level 1"));
-    strcpy(dirNameLvl1, "/Where's Waldo Level 1");
+    char * dirNameLvl1Breadth = (char *)malloc(strlen(1 + "/Where's Waldo Breadth-First Level 1"));
+    strcpy(dirNameLvl1Breadth, "/Where's Waldo Breadth-First Level 1");
     
     // Assign pathLen pointer for reuse in main to point to len's address
-    int len = 1 + strlen(cwd) + strlen(dirNameLvl1);
+    int len = 1 + strlen(cwd) + strlen(dirNameLvl1Breadth);
     *pathLen = len;
     
     // Allocate memory for level 1 folder path, assign, and append to build its string name
-    *dirPathLvl1 = (char *) malloc(*pathLen);
-    strcpy(*dirPathLvl1, cwd);
-    strcat(*dirPathLvl1, dirNameLvl1);
+    *dirPathLvl1_Breadth = (char *) malloc(*pathLen);
+    strcpy(*dirPathLvl1_Breadth, cwd);
+    strcat(*dirPathLvl1_Breadth, dirNameLvl1Breadth);
     
     // Free memory pointer will not be used again
-    free(dirNameLvl1);
+    free(dirNameLvl1Breadth);
+    
+    // Initialize, allocate memory, assign name string
+    char * dirNameLvl1Depth = (char *)malloc(strlen(1 + "/Where's Waldo Depth-First Level 1"));
+    strcpy(dirNameLvl1Depth, "/Where's Waldo Depth-First Level 1");
+    
+    // Allocate memory for level 1 folder path, assign, and append to build its string name
+    *dirPathLvl1_Depth = (char *) malloc(*pathLen);
+    strcpy(*dirPathLvl1_Depth, cwd);
+    strcat(*dirPathLvl1_Depth, dirNameLvl1Depth);
+    
+    // Free memory pointer will not be used again
+    free(dirNameLvl1Depth);
 }
 
 
 
 /* Checks if a Waldo directory tree already exists in same local drive location, if so remove existing directory tree */
-void check_to_remove_existing_waldo_directory(char * dirPathLvl1)
+void check_to_remove_existing_waldo_directories(char * dirPathLvl1_Breadth, char * dirPathLvl1_Depth)
 {
     struct stat st = {0};
     
     // Check if path exists already, if so remove
-    if (stat(dirPathLvl1, &st) != -1)
+    if (stat(dirPathLvl1_Breadth, &st) != -1)
     {
-        remove_directory(dirPathLvl1);
+        remove_directory(dirPathLvl1_Breadth);
+    }
+    
+    // Check if path exists already, if so remove
+    if (stat(dirPathLvl1_Depth, &st) != -1)
+    {
+        remove_directory(dirPathLvl1_Depth);
     }
 }
 
@@ -144,19 +162,12 @@ int remove_directory(const char *path)
 
 
 /* Create Waldo sightings log file */
-void create_sightings_log_file(char * dirPathLvl1, char ** sightingsLogPath, int pathLen)
+void create_sightings_log_file(char * dirPathLvl1, char ** sightingsLogPath, char * sightingsLogName, int pathLen)
 {
-    // Initialize, allocate memory, assign name string
-    char * sightingsLogName = (char *)malloc(strlen(1 + "/Waldo Sightings Log.txt"));
-    strcpy(sightingsLogName, "/Waldo Sightings Log.txt");
-    
     // Allocate memory for sightings file path, build and assign file path
-    *sightingsLogPath = (char *) malloc(1 + pathLen + strlen(sightingsLogName));
+    *sightingsLogPath = (char *) malloc(PATH_MAX);
     strcpy(*sightingsLogPath, dirPathLvl1);
     strcat(*sightingsLogPath, sightingsLogName);
-    
-    // Free memory
-    free(sightingsLogName);
     
     // Create log file with path, close after creation
     FILE* fd = fopen(*sightingsLogPath, "ab+");
@@ -177,8 +188,8 @@ void create_sightings_log_file(char * dirPathLvl1, char ** sightingsLogPath, int
 void create_text_filler_file(char * dirPathLvl1, char ** loremIpsumFilePath, int pathLen)
 {
     // Initialize, allocate memory, assign name string
-    char * loremIpsumFileName = (char *)malloc(strlen(1 + "/Waldo Lorem Ipsum Filler.txt"));
-    strcpy(loremIpsumFileName, "/Waldo Lorem Ipsum Filler.txt");
+    char * loremIpsumFileName = (char *)malloc(strlen(1 + "/_Waldo Lorem Ipsum Filler.txt"));
+    strcpy(loremIpsumFileName, "/_Waldo Lorem Ipsum Filler.txt");
     
     // Allocate memory for text filler file path, build and assign file path
     *loremIpsumFilePath = (char *) malloc(1+ pathLen + strlen(loremIpsumFileName));

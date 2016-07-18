@@ -51,7 +51,7 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremI
         char * const WALDO_DIR_NAME_FORMAT = (char *)malloc(strlen(1 + "%s/Level %d-%d"));
         strcpy(WALDO_DIR_NAME_FORMAT, "%s/Level %d-%d");
         
-        char * const WALDO_FILE_NAME_FORMAT = (char *)malloc(strlen(1 + "%s/W_File %d.txt"));
+        char * const WALDO_FILE_NAME_FORMAT = (char *)malloc(strlen(1 + "%s/File %d.txt"));
         strcpy(WALDO_FILE_NAME_FORMAT, "%s/File %d.txt");
     
 
@@ -232,7 +232,8 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremI
                         createNextLevel = 1;
                         
                         // Get random 0-3 grandchildren directories to be created
-                        childCurr->childDirToCreate = random() % 4;
+                        //childCurr->childDirToCreate = random() % 4;
+                        childCurr->childDirToCreate = 3;
                         
                         // Assign path for child directory creation in next directory level iteration
                         tempDirPath = (char *)malloc(PATH_MAX);

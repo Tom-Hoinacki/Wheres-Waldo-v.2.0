@@ -11,4 +11,6 @@
 
 #include <stdio.h>
 
-#endif /* defined(__Wheres_Waldo_v_2_0__file_creator__) */
+void create_rand3_file_num(char * newFilePath, char * newDirPath, char * loremPath, char * const format);
+
+#endif

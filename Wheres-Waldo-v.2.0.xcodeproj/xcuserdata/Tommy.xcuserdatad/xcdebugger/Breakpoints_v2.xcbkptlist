@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/main.c"
-            timestampString = "490406256.696134"
+            timestampString = "490523001.712692"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "main()"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,43 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "282"
-            endingLineNumber = "282"
-            landmarkName = "create_breadth_first_random_asym_dir_tree()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Wheres-Waldo-v.2.0/main.c"
-            timestampString = "490481702.858066"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "main()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -330,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -346,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -362,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "271"
-            endingLineNumber = "271"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -378,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517925.081332"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
+            startingLineNumber = "273"
+            endingLineNumber = "273"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -394,11 +362,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
+            startingLineNumber = "297"
+            endingLineNumber = "297"
+            landmarkName = "create_breadth_first_random_asym_dir_tree()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
+            timestampString = "490518738.556378"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -426,11 +410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -442,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -458,11 +442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -506,11 +490,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -522,11 +506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -538,11 +522,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -554,11 +538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -570,11 +554,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -586,11 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -602,11 +586,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -634,7 +618,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "139"
@@ -650,11 +634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "250"
-            endingLineNumber = "250"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -666,11 +650,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490518020.819791"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "287"
-            endingLineNumber = "287"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -682,11 +666,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -698,11 +682,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490517064.235572"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -710,15 +694,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490518386.333623"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
+            startingLineNumber = "319"
+            endingLineNumber = "319"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -726,16 +710,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/tree_creator_breadth_first.c"
-            timestampString = "490518502.275031"
+            timestampString = "490518738.556378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "create_breadth_first_random_asym_dir_tree()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wheres-Waldo-v.2.0/level1.c"
+            timestampString = "490523158.075695"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "create_sightings_log_file()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wheres-Waldo-v.2.0/level1.c"
+            timestampString = "490523594.35871"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "create_sightings_log_file()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
