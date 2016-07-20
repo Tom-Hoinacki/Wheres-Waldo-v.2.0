@@ -85,10 +85,10 @@ int main(int argc, const char * argv[])
          /*********************************************************************************************************/
         
          // BREADTH-FIRST RANDOM ASYMMETRICAL DIRECTORY TREE CREATION
-         //create_breadth_first_random_asym_dir_tree(dirPathLvl1, loremIpsumFilePath);
+         create_breadth_first_random_asym_dir_tree(dirPathLvl1_Breadth, loremIpsumFilePath);
         
          // DEPTH-FIRST RANDOM ASYMMETRICAL DIRECTORY TREE CREATION
-         create_depth_first_random_asym_dir_tree(dirPathLvl1_Depth, loremIpsumFilePath);
+         //create_depth_first_random_asym_dir_tree(dirPathLvl1_Depth, loremIpsumFilePath);
 
         
         

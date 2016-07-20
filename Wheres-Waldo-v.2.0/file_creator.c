@@ -50,7 +50,7 @@ void create_rand3_file_num(char * newFilePath, char * newDirPath, char * loremPa
         // Write random Lorem Ipsum to file with random Waldos
         FILE* fdLorem= fopen(loremPath, "r");
         
-        char * loremChar = malloc(2000);
+        //char * loremChar = (char *)malloc(2000);
         
         
         int lineNum = 1;
