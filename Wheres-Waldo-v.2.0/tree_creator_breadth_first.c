@@ -112,7 +112,7 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremI
          * Once parent directory done creating folders, files, and child directory level
          * linked list, then resassign parent linked list with child linked list before
          * next iteration */
-        while (createNextLevel == 1)
+        while (createNextLevel)
         {
             // Reset directory number to 1 for creating directory path string
             dirNum = 1;
@@ -388,9 +388,10 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremI
             
             // Set parent linked list to first element to prepare for creating directories in next level iteration
             parentCurr = parentHead;
+            childCurr = childHead;
             
-            //firstChild = 1;
-            //lvlNum++;
+            firstChild = 1;
+           
     }
     
     
