@@ -280,43 +280,9 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremI
                         tempDirPath = NULL;
                         cPath = NULL;
                         
-
-                        
-                        // Assign path for child directory creation in next directory level iteration
-                        //tempDirPath = (char *)malloc(PATH_MAX);
-                        
-                        
-//                        strcpy(newDirPath, parentCurr->path);
-//                        sprintf(newDirPath, WALDO_DIR_NAME_FORMAT, newDirPath, (lvlNum + 1), dirNum++);
-//                        char * childPath = (char *)malloc(PATH_MAX);
-//                        strcpy(childPath, newDirPath);
-//                        childCurr->path = childPath;
-//                        
-//                        
-//                        
-//                      
-//                        //strcpy(tempDirPath, newDirPath);
-//                        childCurr->path = (char *)malloc(PATH_MAX);
-//                        childCurr->path = newDirPath;
-                        
-                        //free(tempDirPath);
-                        
                         childCounter++;
                        
-                        
-                        
                         parentCurr->childDirToCreate--;
-//                        
-//                        childCurr->next = (dirLvlList *)malloc(sizeof(*childCurr->next) + 10000);
-//                        childCurr = childCurr->next;
-                       
-                        
-                        // If any children elements left to be created, initialize, allocate, point to next newly created list element
-                        //if (parentCurr->childDirToCreate > 0)
-                       // {
-//                            childCurr->next = (dirLvlList *)malloc(sizeof(*childCurr->next) + 1000);
-//                            childCurr = childCurr->next;
-                       // }
                     }
                 }
                 

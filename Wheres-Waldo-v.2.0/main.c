@@ -70,6 +70,8 @@ int main(int argc, const char * argv[])
 //        free(sightingsLogNameBreadth);
         
         create_sightings_log_file(dirPathLvl1_Depth, &sightingsDepthLogPath, sightingsLogNameDepth, pathLen);
+        create_sightings_log_file(dirPathLvl1_Breadth, &sightingsBreadthLogPath, sightingsLogNameBreadth, pathLen);
+        
         free(sightingsLogNameDepth);
 
         
@@ -88,26 +90,26 @@ int main(int argc, const char * argv[])
          create_breadth_first_random_asym_dir_tree(dirPathLvl1_Breadth, loremIpsumFilePath);
         
          // DEPTH-FIRST RANDOM ASYMMETRICAL DIRECTORY TREE CREATION
-         //create_depth_first_random_asym_dir_tree(dirPathLvl1_Depth, loremIpsumFilePath);
+         create_depth_first_random_asym_dir_tree(dirPathLvl1_Depth, loremIpsumFilePath);
 
         
         
         /* LOG ALL WALDO SIGHTINGS BY TRAVERSING ASYMMETRIC TREE BREADTH & DEPTH FIRST, STRING SEARCH EACH TEXT FILE FOR "Waldo" OCCURENCES */
         /************************************************************************************************************************************/
         
-        // Create log file, make writable (BREADTH-FIRST)
-//        FILE * sightingsBreadthLogFile = fopen(sightingsBreadthLogPath, "w");
-//        
-//        if (sightingsBreadthLogFile == NULL)
-//        {
-//            fprintf(stderr, "Error: Failed to open sightingsBreadthLogFile - %s\n", strerror(errno));
-//            return 1;
-//        }
-//        
-//        // Traverse tree depth-first string searching one text file at a time and logging sightings
-//        int sightingsBreadthCount = 1;
-//        log_waldo_sightings_dir(dirPathLvl1_Breadth, sightingsBreadthLogFile, &sightingsBreadthCount);
-//        fclose(sightingsBreadthLogFile);
+        //Create log file, make writable (BREADTH-FIRST)
+        FILE * sightingsBreadthLogFile = fopen(sightingsBreadthLogPath, "w");
+        
+        if (sightingsBreadthLogFile == NULL)
+        {
+            fprintf(stderr, "Error: Failed to open sightingsBreadthLogFile - %s\n", strerror(errno));
+            return 1;
+        }
+        
+        // Traverse tree depth-first string searching one text file at a time and logging sightings
+        int sightingsBreadthCount = 1;
+        log_waldo_sightings_dir_breadth_first(dirPathLvl1_Breadth, sightingsBreadthLogFile, &sightingsBreadthCount);
+        fclose(sightingsBreadthLogFile);
         
         
         // Create log file, make writable (DEPTH-FIRST)
