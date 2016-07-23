@@ -39,6 +39,18 @@ int main(int argc, const char * argv[])
     char * dirPathLvl1_Breadth, * dirPathLvl1_Depth;
     int pathLen;
     char * loremIpsumFilePath; // text filler file path
+    
+    
+    char * createBreadthLogPath, * createDepthLogPath;
+    
+    char * createLogNameBreadth = (char *)malloc(strlen(1 + "/_Waldo Breadth-First Directory Creation Log.txt"));
+
+    strcpy(createLogNameBreadth, "/_Waldo Breadth-First Directory Creation Log.txt");
+    
+    char * createLogNameDepth = (char *)malloc(strlen(1 + "/_Waldo Depth-First Directory Creation Log.txt"));
+    strcpy(createLogNameDepth, "/_Waldo Depth-First Directory Creation Log.txt");
+
+    
     char * sightingsBreadthLogPath, * sightingsDepthLogPath;
     char * sightingsLogNameBreadth = (char *)malloc(strlen(1 + "/_Waldo Breadth-First Sightings Log.txt"));
     strcpy(sightingsLogNameBreadth, "/_Waldo Breadth-First Sightings Log.txt");
@@ -65,16 +77,18 @@ int main(int argc, const char * argv[])
         mkdir(dirPathLvl1_Breadth, 0700);
         mkdir(dirPathLvl1_Depth, 0700);
         
-        // Create log file of Waldo sightings in top level directory
-//        create_sightings_log_file(dirPathLvl1_Breadth, &sightingsBreadthLogPath, sightingsLogNameBreadth, pathLen);
-//        free(sightingsLogNameBreadth);
+        /* Create directory creation and sightings log files in top level directory */
+        create_log_file(dirPathLvl1_Breadth, &createBreadthLogPath, createLogNameBreadth);
+        create_log_file(dirPathLvl1_Depth, &createDepthLogPath, createLogNameDepth);
         
-        create_sightings_log_file(dirPathLvl1_Depth, &sightingsDepthLogPath, sightingsLogNameDepth, pathLen);
-        create_sightings_log_file(dirPathLvl1_Breadth, &sightingsBreadthLogPath, sightingsLogNameBreadth, pathLen);
+        create_log_file(dirPathLvl1_Breadth, &sightingsBreadthLogPath, sightingsLogNameBreadth);
+        create_log_file(dirPathLvl1_Depth, &sightingsDepthLogPath, sightingsLogNameDepth);
         
+        free(createLogNameBreadth);
+        free(createLogNameDepth);
+        free(sightingsLogNameBreadth);
         free(sightingsLogNameDepth);
 
-        
         // Create Lorem Ispum file inside top directory to copy text from for creating other text files
         create_text_filler_file(dirPathLvl1_Breadth, &loremIpsumFilePath, pathLen);
         create_text_filler_file(dirPathLvl1_Depth, &loremIpsumFilePath, pathLen);

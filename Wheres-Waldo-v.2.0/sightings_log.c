@@ -293,8 +293,6 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
          // next level iteration
          while (childCurr != NULL)
          {
-             parentCurr->childDirToCreate = childCurr->childDirToCreate;
-             
              tempDirPath = (char *)malloc(PATH_MAX);
              strcpy(tempDirPath, childCurr->path);
              
@@ -311,8 +309,10 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
                  firstChild = 0;
              }
              
-             parentCurr->next = (dirLvlList *)malloc(sizeof(*parentCurr->next) + 1000);
              
+             
+            parentCurr->next = (dirLvlList *)malloc(sizeof(*parentCurr->next) + 1000);
+            parentCurr->next->path = (char *)malloc(PATH_MAX);
              
              // Point to next element in parent and child level linked lists
              parentCurr = parentCurr->next;
@@ -337,8 +337,7 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
          childCurr = childHead;
          
          firstChild = 1;
-         
-     }
+    }
     
     
     // Free parent and child linked list memory
@@ -364,10 +363,7 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
     free(childHead);
     free(WALDO_DIR_NAME_FORMAT);
     free(WALDO_FILE_NAME_FORMAT);
-    free(newFilePath);
-}
-
-    }
+   // free(newFilePath);
 }
 
 

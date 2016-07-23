@@ -27,7 +27,7 @@
 void get_dir_lvl1_Path(char * cwd, char ** dirPathLvl1, int * pathLen);
 void check_to_remove_existing_waldo_directories(char * dirPathLvl1_Breadth, char * dirPathLvl1_Depth);
 int remove_directory(const char *path);
-void create_sightings_log_file(char * dirPathLvl1, char ** sightingsLogPath, char * sightingsLogName, int pathLen);
+void create_log_file(char * dirPathLvl1, char ** logPath, char * logName);
 void create_text_filler_file(char * dirPathLvl1, char ** loremIpsumFilePath, int pathLen);
 
 
@@ -160,17 +160,16 @@ int remove_directory(const char *path)
 }
 
 
-
 /* Create Waldo sightings log file */
-void create_sightings_log_file(char * dirPathLvl1, char ** sightingsLogPath, char * sightingsLogName, int pathLen)
+void create_log_file(char * dirPathLvl1, char ** logPath, char * logName)
 {
-    // Allocate memory for sightings file path, build and assign file path
-    *sightingsLogPath = (char *) malloc(PATH_MAX);
-    strcpy(*sightingsLogPath, dirPathLvl1);
-    strcat(*sightingsLogPath, sightingsLogName);
+    // Allocate memory for log file, build and assign file path
+    *logPath = (char *) malloc(PATH_MAX);
+    strcpy(*logPath, dirPathLvl1);
+    strcat(*logPath, logName);
     
     // Create log file with path, close after creation
-    FILE* fd = fopen(*sightingsLogPath, "w+");
+    FILE* fd = fopen(*logPath, "w+");
     
     // Close file
     if(fd != NULL)
