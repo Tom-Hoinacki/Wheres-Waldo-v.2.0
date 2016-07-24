@@ -284,14 +284,11 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
          
          // Set number of child directories to be made in the next level
          dirLevelCount = childCount;
-         
-         childCount = 0;
          firstChild = 1;
-         
          
          // Assign child directory level linked list to parent level linked list before
          // next level iteration
-         while (childCurr != NULL)
+         while (childCount > 0)
          {
              tempDirPath = (char *)malloc(PATH_MAX);
              strcpy(tempDirPath, childCurr->path);
@@ -308,7 +305,6 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
                  parentHead = parentCurr;
                  firstChild = 0;
              }
-             
              
              
             parentCurr->next = (dirLvlList *)malloc(sizeof(*parentCurr->next) + 1000);
@@ -329,7 +325,7 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
              free(childToParentTemp);
              tempDirPath = NULL;
              childToParentTemp = NULL;
-             
+             childCount--;
          }
          
          // Set parent linked list to first element to prepare for creating directories in next level iteration
@@ -346,7 +342,7 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
     while (nextElm != NULL)
     {
         nextElm = childHead->next;
-        free(childHead->path);
+        //free(childHead->path);
         free(childHead);
         childHead = nextElm;
     }
@@ -356,25 +352,15 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
     while (next_parent_elm != NULL)
     {
         next_parent_elm = parentHead->next;
-        free(parentHead->path);
+        //free(parentHead->path);
         free(parentHead);
         parentHead = next_parent_elm;
     }
     
     
     // Free variable pointer memory
-    free(childHead->path);
     free(childHead);
-    
-    free(childCurr->path);
-    free(childCurr);
-    
-    free(parentHead->path);
     free(parentHead);
-    
-    free(parentCurr->path);
-    free(parentCurr);
-    
     free(WALDO_DIR_NAME_FORMAT);
     free(WALDO_FILE_NAME_FORMAT);
 }

@@ -44,7 +44,7 @@ void create_rand3_file_num(char * newFilePath, char * newDirPath, FILE * creatio
 void create_depth_first_random_asym_dir_tree(char * dirPathLvl1, char * creationLogPath, char * loremIpsumFilePath)
 {
     // Open creation log file
-    FILE* creationLogFile = fopen(creationLogPath, "ab+");
+    FILE * creationLogFile = fopen(creationLogPath, "ab+");
 
     // Initialize children directory path variables
     const int WALDO_DIR_NAME_LEN = 11;

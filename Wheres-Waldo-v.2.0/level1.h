@@ -17,7 +17,7 @@ void check_to_remove_existing_waldo_directory(char * outputPath);
 
 void create_log_file(char * dirPathLvl1, char ** sightingsLogPath, char * logName);
 
-void create_text_filler_file(char * dirPathLvl1, char ** loremIpsumFilePath, int pathLen);
+void create_text_filler_file(char * waldoOutputPath, char ** loremIpsumFilePath, int pathLen);
 
 void log_creation_path(FILE * logPath, char * newPath);
 

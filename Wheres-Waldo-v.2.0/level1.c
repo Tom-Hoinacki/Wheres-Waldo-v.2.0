@@ -38,8 +38,8 @@ void log_creation_path(FILE * logPath, char * newPath);
 void get_dir_lvl1_Paths(char * cwd, char ** dirPathLvl1_Breadth, char ** dirPathLvl1_Depth, int * pathLen)
 {
     // Initialize, allocate memory, assign name string
-    char * dirNameLvl1Breadth = (char *)malloc(strlen(1 + "/_Where's Waldo Breadth-First Level 1"));
-    strcpy(dirNameLvl1Breadth, "/_Where's Waldo Breadth-First Level 1");
+    char * dirNameLvl1Breadth = (char *)malloc(strlen(1 + "/Breadth-First Level 1"));
+    strcpy(dirNameLvl1Breadth, "/Breadth-First Level 1");
     
     // Assign pathLen pointer for reuse in main to point to len's address
     int len = 1 + strlen(cwd) + strlen(dirNameLvl1Breadth);
@@ -54,8 +54,8 @@ void get_dir_lvl1_Paths(char * cwd, char ** dirPathLvl1_Breadth, char ** dirPath
     free(dirNameLvl1Breadth);
     
     // Initialize, allocate memory, assign name string
-    char * dirNameLvl1Depth = (char *)malloc(strlen(1 + "/_Where's Waldo Depth-First Level 1"));
-    strcpy(dirNameLvl1Depth, "/_Where's Waldo Depth-First Level 1");
+    char * dirNameLvl1Depth = (char *)malloc(strlen(1 + "/Depth-First Level 1"));
+    strcpy(dirNameLvl1Depth, "/Depth-First Level 1");
     
     // Allocate memory for level 1 folder path, assign, and append to build its string name
     *dirPathLvl1_Depth = (char *) malloc(*pathLen);
@@ -163,8 +163,7 @@ int remove_directory(const char *path)
 /* Create Waldo sightings log file */
 void create_log_file(char * dirPathLvl1, char ** logPath, char * logName)
 {
-    // Allocate memory for log file, build and assign file path
-    *logPath = (char *) malloc(PATH_MAX);
+    // Assign and append log file path
     strcpy(*logPath, dirPathLvl1);
     strcat(*logPath, logName);
     
@@ -192,15 +191,15 @@ void log_creation_path(FILE * logFile, char * newPath)
 
 
 /* Create text filler file that lives inside Waldo level and has string Waldo randomly inserted */
-void create_text_filler_file(char * dirPathLvl1, char ** loremIpsumFilePath, int pathLen)
+void create_text_filler_file(char * waldoOutputPath, char ** loremIpsumFilePath, int pathLen)
 {
     // Initialize, allocate memory, assign name string
-    char * loremIpsumFileName = (char *)malloc(strlen(1 + "/_Waldo Lorem Ipsum Filler.txt"));
-    strcpy(loremIpsumFileName, "/_Waldo Lorem Ipsum Filler.txt");
+    char * loremIpsumFileName = (char *)malloc(strlen(1 + "/_Lorem Ipsum Text Filler.txt"));
+    strcpy(loremIpsumFileName, "/_Lorem Ipsum Text Filler.txt");
     
     // Allocate memory for text filler file path, build and assign file path
     *loremIpsumFilePath = (char *) malloc(1+ pathLen + strlen(loremIpsumFileName));
-    strcpy(*loremIpsumFilePath, dirPathLvl1);
+    strcpy(*loremIpsumFilePath, waldoOutputPath);
     strcat(*loremIpsumFilePath, loremIpsumFileName);
     
     // Free memory

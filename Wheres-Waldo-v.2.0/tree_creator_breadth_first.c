@@ -46,7 +46,7 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
     /*****************************************/
 
     // Open creation log file
-    FILE* creationLogFile = fopen(creationLogPath, "ab+");
+    FILE * creationLogFile = fopen(creationLogPath, "ab+");
 
     // Initialize directory path variables
     const int WALDO_DIR_NAME_LEN = 13;
@@ -203,7 +203,8 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
             // Create parent directory
             mkdir(parentCurr->path, 0700);
             
-            log_creation_path(creationLogFile, newDirPath);
+            // Log directory creation path
+            log_creation_path(creationLogFile, parentCurr->path);
             
             newDirPath = (char *)malloc(PATH_MAX);
             
@@ -386,19 +387,8 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
     
     
     // Free variable pointer memory
-    free(childHead->path);
     free(childHead);
-    
-    free(childCurr->path);
-    free(childCurr);
-    
-    free(parentHead->path);
     free(parentHead);
-    
-    free(parentCurr->path);
-    free(parentCurr);
-    
-    
     free(WALDO_DIR_NAME_FORMAT);
     free(WALDO_FILE_NAME_FORMAT);
     free(newFilePath);
