@@ -346,24 +346,37 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
     while (nextElm != NULL)
     {
         nextElm = childHead->next;
+        free(childHead->path);
         free(childHead);
         childHead = nextElm;
     }
+    
     struct list_elm * next_parent_elm = parentHead;
     
     while (next_parent_elm != NULL)
     {
         next_parent_elm = parentHead->next;
+        free(parentHead->path);
         free(parentHead);
         parentHead = next_parent_elm;
     }
     
     
     // Free variable pointer memory
+    free(childHead->path);
     free(childHead);
+    
+    free(childCurr->path);
+    free(childCurr);
+    
+    free(parentHead->path);
+    free(parentHead);
+    
+    free(parentCurr->path);
+    free(parentCurr);
+    
     free(WALDO_DIR_NAME_FORMAT);
     free(WALDO_FILE_NAME_FORMAT);
-   // free(newFilePath);
 }
 
 

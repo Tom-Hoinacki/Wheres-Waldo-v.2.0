@@ -223,6 +223,7 @@ void create_depth_first_random_asym_dir_tree(char * dirPathLvl1, char * creation
     free(WALDO_DIR_NAME_FORMAT);
     free(WALDO_FILE_NAME_FORMAT);
     free(parentDirName);
+    free(parentPath);
     free(newDirPath);
     free(newFilePath);
     free(dirPathLvl2);
