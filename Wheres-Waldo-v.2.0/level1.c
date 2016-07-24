@@ -23,47 +23,61 @@
 // Application Header
 #include "level1.h"
 
-//Function Signatures
-void get_dir_lvl1_Path(char * cwd, char ** dirPathLvl1, int * pathLen);
+//Header Function Signatures
+void get_dir_lvl1_Path(char * outputDir, char ** dirPathLvl1, int * pathLen);
 void check_to_remove_existing_waldo_directory(char * outputPath);
 int remove_directory(const char *path);
 void create_log_file(char * dirPathLvl1, char ** logPath, char * logName);
 void create_text_filler_file(char * dirPathLvl1, char ** loremIpsumFilePath, int pathLen);
 void log_creation_path(FILE * logPath, char * newPath);
 
+//File Function Sigatures
+void get_output_path(char * outputDir, char ** dirPathLvl1, char * name,  int * pathLen);
+void build_path_string(char ** path, int * len, char * outputDir, char * name);
+
+
+
+
 
 //Function Implementations
 
 /* Creates Waldo Level 1 folder */
-void get_dir_lvl1_Paths(char * cwd, char ** dirPathLvl1_Breadth, char ** dirPathLvl1_Depth, int * pathLen)
+void get_dir_lvl1_Paths(char * outputDir, char ** dirPathLvl1_Breadth, char ** dirPathLvl1_Depth, int * pathLen)
 {
-    // Initialize, allocate memory, assign name string
+    // Create breadth dir level 1 name
     char * dirNameLvl1Breadth = (char *)malloc(strlen(1 + "/Breadth-First Level 1"));
     strcpy(dirNameLvl1Breadth, "/Breadth-First Level 1");
     
-    // Assign pathLen pointer for reuse in main to point to len's address
-    int len = 1 + strlen(cwd) + strlen(dirNameLvl1Breadth);
-    *pathLen = len;
+    // Get breadth dir level 1 path
+    get_output_path(outputDir, dirPathLvl1_Breadth, dirNameLvl1Breadth, pathLen);
     
-    // Allocate memory for level 1 folder path, assign, and append to build its string name
-    *dirPathLvl1_Breadth = (char *) malloc(*pathLen);
-    strcpy(*dirPathLvl1_Breadth, cwd);
-    strcat(*dirPathLvl1_Breadth, dirNameLvl1Breadth);
     
-    // Free memory pointer will not be used again
-    free(dirNameLvl1Breadth);
-    
-    // Initialize, allocate memory, assign name string
+    // Create depth dir level 1 name
     char * dirNameLvl1Depth = (char *)malloc(strlen(1 + "/Depth-First Level 1"));
     strcpy(dirNameLvl1Depth, "/Depth-First Level 1");
     
+    // Get depth dir level 1 path
+    get_output_path(outputDir, dirPathLvl1_Depth, dirNameLvl1Depth, pathLen);
+}
+
+void get_output_path(char * outputDir, char ** dirPathLvl1, char * name,  int * pathLen)
+{
+    // Assign pathLen pointer for reuse in main to point to len's address
+    int len = 1 + strlen(outputDir) + strlen(name);
+    *pathLen = len;
+    
     // Allocate memory for level 1 folder path, assign, and append to build its string name
-    *dirPathLvl1_Depth = (char *) malloc(*pathLen);
-    strcpy(*dirPathLvl1_Depth, cwd);
-    strcat(*dirPathLvl1_Depth, dirNameLvl1Depth);
+    build_path_string(dirPathLvl1, pathLen, outputDir, name);
     
     // Free memory pointer will not be used again
-    free(dirNameLvl1Depth);
+    free(name);
+}
+
+void build_path_string(char ** path, int * len, char * outputDir, char * name)
+{
+    *path = (char *)malloc(*len);
+    strcpy(*path, outputDir);
+    strcat(*path, name);
 }
 
 
@@ -78,12 +92,6 @@ void check_to_remove_existing_waldo_directory(char * outputPath)
     {
         remove_directory(outputPath);
     }
-//    
-//    // Check if path exists already, if so remove
-//    if (stat(dirPathLvl1_Depth, &st) != -1)
-//    {
-//        remove_directory(dirPathLvl1_Depth);
-//    }
 }
 
 

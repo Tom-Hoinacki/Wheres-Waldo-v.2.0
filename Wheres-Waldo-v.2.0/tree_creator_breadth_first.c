@@ -64,10 +64,9 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
 
     // Initialize children directory level counters for how many children directory
     //left to create at that level (random 1-3 for Level 2, random 0-3 for Levels 3 & 4)
-    // int mkDirCount = rand() % 3 + 1;
-    int mkDirCount= 3;
+    int mkDirCount = rand() % 3 + 1;
+    //int mkDirCount= 3;
     int dirsToCreate = mkDirCount;
-
     int childCounter = 0;
 
 
@@ -139,8 +138,8 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
             {
                 
                 // Random get children to create, make current parent directory path and folder
-                //parentCurr->childDirToCreate = random() % 4;
-                parentCurr->childDirToCreate = 3;
+                parentCurr->childDirToCreate = random() % 4;
+                //parentCurr->childDirToCreate = 3;
                 
                 newDirPath = (char *)malloc(PATH_MAX);
                 // Assign parent folder path
@@ -257,8 +256,8 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
                     createNextLevel = 1;
                     
                     // Get random 0-3 grandchildren directories to be created
-                    //childCurr->childDirToCreate = random() % 4;
-                    childCurr->childDirToCreate = 3;
+                    childCurr->childDirToCreate = random() % 4;
+                    //childCurr->childDirToCreate = 3;
                     
                     
                     
