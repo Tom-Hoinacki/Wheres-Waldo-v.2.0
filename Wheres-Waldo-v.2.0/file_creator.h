@@ -11,6 +11,6 @@
 
 #include <stdio.h>
 
-void create_rand3_file_num(char * newFilePath, char * newDirPath, char * loremPath, char * const format);
+void create_rand3_file_num(char * newFilePath, char * newDirPath, FILE * creationLogFile, char * loremPath, char * const format);
 
 #endif

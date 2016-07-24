@@ -22,17 +22,18 @@
 
 // Application Headers
 #include "file_creator.h"
+#include "level1.h"
 
 
 // Function Signatures
-void create_rand3_file_num(char * newFilePath, char * newDirPath, char * loremPath, char * const format);
+void create_rand3_file_num(char * newFilePath, char * newDirPath, FILE * creationLogFile, char * loremPath, char * const format);
 
 
 
 // Function Implementations
 
 /* Creates between 1-3 (random) files for every child directory created in the Waldo tree */
-void create_rand3_file_num(char * newFilePath, char * newDirPath, char * loremPath, char * const format)
+void create_rand3_file_num(char * newFilePath, char * newDirPath, FILE * creationLogFile, char * loremPath, char * const format)
 {
     int filesToCreate = rand() % 3 + 1;
     int fileNum = 1;
@@ -44,67 +45,65 @@ void create_rand3_file_num(char * newFilePath, char * newDirPath, char * loremPa
         size_t n = 0;
         int c;
         
-        
         FILE* fd = fopen(newFilePath, "ab+");
-        
-        // Write random Lorem Ipsum to file with random Waldos
-        FILE* fdLorem= fopen(loremPath, "r");
-        
-        //char * loremChar = (char *)malloc(2000);
-        
-        
-        int lineNum = 1;
-        int chCount = 0;
-        const int  MAX_CHAR_LAST_WORD = 75;
-        
-        
-        // Process Lorem Ipsum text file one char at a time to print to current Waldo Level text file
-        while ((c = fgetc(fdLorem)) != EOF)
-        {
-            if ((char) c == ' ')
-            {
-                // 1 in 100 chance Waldo will be printed after each word
-                int printWaldo = rand() % 100 + 1;
-                if (printWaldo == 100)
-                {
-                    fprintf(fd, " Waldo");
-                    chCount += 6;
-                }
-            }
-            
-            // If start of line print line number and tab
-            if (chCount == 0)
-            {
-                fprintf(fd, "%d", lineNum);
-                lineNum++;
-                fputs("\t", fd);
-                
-                // Print character, increase count
-                fputc((char) c , fd);
-                chCount++;
-            }
-            // Else if the character counter has reached the maximum for the last word check for whitespace
-            // to start a new line and reset the character counter
-            else if (chCount >= MAX_CHAR_LAST_WORD)
-            {
-                if ((char) c == ' ')
-                {
-                    fputs("\n", fd);
-                    chCount = 0;
-                }
-            }
-            else
-            {
-                // Print character, increase count
-                fputc((char) c , fd);
-                chCount++;
-            }
-        }
-        
-        filesToCreate--;
         
         if (fd != NULL)
         {
+            // Log directory creation path
+            log_creation_path(creationLogFile, newFilePath);
+            
+            // Write random Lorem Ipsum to file with random Waldos
+            FILE* fdLorem = fopen(loremPath, "r");
+            
+            int lineNum = 1;
+            int chCount = 0;
+            const int  MAX_CHAR_LAST_WORD = 75;
+            
+            
+            // Process Lorem Ipsum text file one char at a time to print to current Waldo Level text file
+            while ((c = fgetc(fdLorem)) != EOF)
+            {
+                if ((char) c == ' ')
+                {
+                    // 1 in 100 chance Waldo will be printed after each word
+                    int printWaldo = rand() % 100 + 1;
+                    if (printWaldo == 100)
+                    {
+                        fprintf(fd, " Waldo");
+                        chCount += 6;
+                    }
+                }
+                
+                // If start of line print line number and tab
+                if (chCount == 0)
+                {
+                    fprintf(fd, "%d", lineNum);
+                    lineNum++;
+                    fputs("\t", fd);
+                    
+                    // Print character, increase count
+                    fputc((char) c , fd);
+                    chCount++;
+                }
+                // Else if the character counter has reached the maximum for the last word check for whitespace
+                // to start a new line and reset the character counter
+                else if (chCount >= MAX_CHAR_LAST_WORD)
+                {
+                    if ((char) c == ' ')
+                    {
+                        fputs("\n", fd);
+                        chCount = 0;
+                    }
+                }
+                else
+                {
+                    // Print character, increase count
+                    fputc((char) c , fd);
+                    chCount++;
+                }
+            }
+            
+            filesToCreate--;
             fclose(fd);
         }
     }

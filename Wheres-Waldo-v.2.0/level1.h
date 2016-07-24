@@ -19,5 +19,7 @@ void create_log_file(char * dirPathLvl1, char ** sightingsLogPath, char * logNam
 
 void create_text_filler_file(char * dirPathLvl1, char ** loremIpsumFilePath, int pathLen);
 
+void log_creation_path(FILE * logPath, char * newPath);
+
 #endif
 

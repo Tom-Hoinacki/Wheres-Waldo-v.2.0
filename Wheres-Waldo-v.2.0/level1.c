@@ -29,7 +29,7 @@ void check_to_remove_existing_waldo_directories(char * dirPathLvl1_Breadth, char
 int remove_directory(const char *path);
 void create_log_file(char * dirPathLvl1, char ** logPath, char * logName);
 void create_text_filler_file(char * dirPathLvl1, char ** loremIpsumFilePath, int pathLen);
-
+void log_creation_path(FILE * logPath, char * newPath);
 
 
 //Function Implementations
@@ -180,6 +180,14 @@ void create_log_file(char * dirPathLvl1, char ** logPath, char * logName)
     {
         int error = strerror(errno);
     }
+}
+
+
+/* Logs creation path order as program builds out the directory trees and their files */
+void log_creation_path(FILE * logFile, char * newPath)
+{
+    // Print creation path to log file
+    fprintf(logFile, "%s\n", newPath);
 }
 
 

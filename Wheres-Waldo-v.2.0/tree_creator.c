@@ -24,11 +24,12 @@
 // Application Headers
 #include "tree_creator.h"
 #include "file_creator.h"
+#include "level1.h"
 
 
 // Function Signatures
-void create_depth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremIpsumFilePath);
-void create_rand3_file_num(char * newFilePath, char * newDirPath, char * loremPath, char * const format);
+void create_depth_first_random_asym_dir_tree(char * dirPathLvl1, char * creationLogPath, char * loremIpsumFilePath);
+void create_rand3_file_num(char * newFilePath, char * newDirPath, FILE * creationLogFile,  char * loremPath, char * const format);
 
 
 
@@ -37,12 +38,14 @@ void create_rand3_file_num(char * newFilePath, char * newDirPath, char * loremPa
 /* CREATE RANDOM ASYMMETRICAL CHILD DIRECTORY TREE
  * RANDOM BETWEEN 2-4 LEVELS OF CHILD DEPTH
  * RANDOM BETWEEN 1-3 CHILD DIRECTORIES CREATED WITHIN EACH DIRECTORY
- * RANDOM BETWEEN 1-3 TEXT FILES IN EACH DIRECTORY CREATED
+ * RANDOM BETWEEN 1-3 TEXT FILES IN EACH DIRECTORY CREAT
  * RANDOM 1/100 CHANCE STRING "Waldo" IS INSERTED AFTER EACH WORD STREAMED AND PRINTED INTO EACH TEXT FILE
  /*********************************************************************************************************/
-void create_depth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremIpsumFilePath)
+void create_depth_first_random_asym_dir_tree(char * dirPathLvl1, char * creationLogPath, char * loremIpsumFilePath)
 {
-    
+    // Open creation log file
+    FILE* creationLogFile = fopen(creationLogPath, "ab+");
+
     // Initialize children directory path variables
     const int WALDO_DIR_NAME_LEN = 11;
     
@@ -105,8 +108,11 @@ void create_depth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremIps
                     sprintf(newDirPath, WALDO_DIR_NAME_FORMAT, parentPath, lvlNum, dirNumLvl2++);
                     mkdir(newDirPath, 0700);
                     
+                    // Log directory creation path
+                    log_creation_path(creationLogFile, newDirPath);
+                    
                     // Get random num 1-3 and create that number of empty text files in new directory
-                    create_rand3_file_num(newFilePath, newDirPath, loremIpsumFilePath, WALDO_FILE_NAME_FORMAT);
+                    create_rand3_file_num(newFilePath, newDirPath, creationLogFile, loremIpsumFilePath, WALDO_FILE_NAME_FORMAT);
                     
                     // Save new parent path for next level down directory creation
                     strcpy(parentPath, newDirPath);
@@ -142,10 +148,13 @@ void create_depth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremIps
                     sprintf(newDirPath, WALDO_DIR_NAME_FORMAT, parentPath, lvlNum, dirNumLvl3++);
                     mkdir(newDirPath, 0700);
                     
+                    // Log directory creation path
+                    log_creation_path(creationLogFile, newDirPath);
+                    
                     mkDirLvl3--;
                     
                     // Get random num 1-3 and create that number of empty text files in new directory
-                    create_rand3_file_num(newFilePath, newDirPath, loremIpsumFilePath, WALDO_FILE_NAME_FORMAT);
+                    create_rand3_file_num(newFilePath, newDirPath, creationLogFile, loremIpsumFilePath, WALDO_FILE_NAME_FORMAT);
                     
                     // Get how many children direct children directories are to be created
                     mkDirLvl4 = rand() % 4;
@@ -184,10 +193,13 @@ void create_depth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremIps
                     sprintf(newDirPath, WALDO_DIR_NAME_FORMAT, parentPath, lvlNum, dirNumLvl4++);
                     mkdir(newDirPath, 0700);
                     
+                    // Log directory creation path
+                    log_creation_path(creationLogFile, newDirPath);
+                    
                     mkDirLvl4--;
                     
                     // Get random num 1-3 and create that number of empty text files in new directory
-                    create_rand3_file_num(newFilePath, newDirPath, loremIpsumFilePath, WALDO_FILE_NAME_FORMAT);
+                    create_rand3_file_num(newFilePath, newDirPath, creationLogFile, loremIpsumFilePath, WALDO_FILE_NAME_FORMAT);
                 }
                 
                 
@@ -214,6 +226,12 @@ void create_depth_first_random_asym_dir_tree(char * dirPathLvl1, char * loremIps
     free(newDirPath);
     free(newFilePath);
     free(dirPathLvl2);
+    
+    // Close creation log file, free point
+    if (creationLogFile != NULL)
+    {
+        fclose(creationLogFile);
+    }
 }
 
 
