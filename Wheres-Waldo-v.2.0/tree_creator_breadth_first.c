@@ -203,7 +203,7 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
             // Create parent directory
             mkdir(parentCurr->path, 0700);
             
-            
+            log_creation_path(creationLogFile, newDirPath);
             
             newDirPath = (char *)malloc(PATH_MAX);
             

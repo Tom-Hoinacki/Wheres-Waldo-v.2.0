@@ -24,7 +24,7 @@
 
 //Function Signatures
 void log_waldo_sightings_dir_breadth_first(char * dirPath, FILE * sightingsLogFile, int * sightingsCount);
-void log_waldo_sightings_dir_depth_first(char * dirPath, FILE * sightingsLogFile, int * sightingsCount);
+void log_waldo_sightings_dir_depth_first(char * dirPath, FILE * sightingsLogFile, int * sightingsCount, int * firstLevel);
 void log_waldo_sightings_txtfile(char* dirPath, struct dirent* in_File, FILE * sightingsLogFile, int * sightingsCount);
 
 
@@ -449,7 +449,7 @@ void breadth_First_Create_First_Parent_Linked_List(char * dirPathLvl1, dirLvlLis
 
 
 /* Recursive method to search all text files for "Waldo" string DEPTH-FIRST */
-void log_waldo_sightings_dir_depth_first(char * dirPath, FILE * sightingsLogFile, int * sightingsCount)
+void log_waldo_sightings_dir_depth_first(char * dirPath, FILE * sightingsLogFile, int * sightingsCount, int * firstLevel)
 {
     struct dirent * in_Dir;
     DIR * d;
@@ -460,6 +460,8 @@ void log_waldo_sightings_dir_depth_first(char * dirPath, FILE * sightingsLogFile
     // Open current directory
     d = opendir(dirPath);
     stat(dirPath, &st);
+ 
+    
     
     // Child directories
     while ((in_Dir = readdir(d)) != NULL)
@@ -476,13 +478,18 @@ void log_waldo_sightings_dir_depth_first(char * dirPath, FILE * sightingsLogFile
         // If file, open file, start string search, else traverse to next child directory
         if (S_ISREG(st.st_mode))
         {
-            log_waldo_sightings_txtfile(dirPath, in_Dir, sightingsLogFile, sightingsCount);
+            // Skip readding log files and text filler file in Level 1
+            if (!*firstLevel)
+            {
+                log_waldo_sightings_txtfile(dirPath, in_Dir, sightingsLogFile, sightingsCount);
+            }
         }
         else if (S_ISDIR(st.st_mode))
         {
+            *firstLevel = 0;
             strcat(childDirPath, "/");
             strcat(childDirPath, in_Dir->d_name);
-            log_waldo_sightings_dir_depth_first(childDirPath, sightingsLogFile, sightingsCount);
+            log_waldo_sightings_dir_depth_first(childDirPath, sightingsLogFile, sightingsCount, firstLevel);
             strcpy(childDirPath, dirPath);
         }
     }

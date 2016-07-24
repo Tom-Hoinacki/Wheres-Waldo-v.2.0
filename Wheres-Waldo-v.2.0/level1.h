@@ -13,7 +13,7 @@
 
 void get_dir_lvl1_Paths(char * currentWorkingDirectory, char ** dirPathLvl1_Breadth, char ** dirPathLvl1_Depth, int * pathLen);
 
-void check_to_remove_existing_waldo_directories(char * dirPathLvl1Breadth, char * dirPathLvl1Depth);
+void check_to_remove_existing_waldo_directory(char * outputPath);
 
 void create_log_file(char * dirPathLvl1, char ** sightingsLogPath, char * logName);
 

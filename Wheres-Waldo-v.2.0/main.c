@@ -55,21 +55,52 @@ int main(int argc, const char * argv[])
     char * sightingsLogNameDepth = (char *)malloc(strlen(1 + "/_Waldo Depth-First Sightings Log.txt"));
     strcpy(sightingsLogNameDepth, "/_Waldo Depth-First Sightings Log.txt");
     
+    FILE * outputFd;
+    int mkDirStatus;
+    //outputFd = fopen("/Desktop", "ab+");
+    
+    //char * waldoOutputPath = (char *)malloc(strlen(1 + "Desktop/Wheres-Waldo-Output"));
+    char * waldoOutputPath = (char *)malloc(PATH_MAX);
+    
+    strcpy(waldoOutputPath, "/Users/Tommy/Desktop/Wheres-Waldo-Output");
+    
+    check_to_remove_existing_waldo_directory(waldoOutputPath);
+    
+    mkDirStatus = mkdir(waldoOutputPath, 0700);
+    //outputFd = fopen(waldoOutputPath, "ab+");
+    
+//    if (fcntl(outputFd, F_GETPATH, waldoOutputPath) != -1)
+//    {
+//        // do something with the file path
+//    }
+//    
+//strcpy(waldoOutputPath, readlink(outputFd);
+//    strcat(waldoOutputPath, "~/Desktop/Wheres-Waldo-Output");
+
+    //outputFd = fopen(, "ab+");
     
     /* Get directory working directory path where this code is being executed
      from to act as starting point for creating directory tree */
-    if (getcwd(cwd, sizeof(cwd)) != NULL)
-    {
-        
+    //if (getcwd(cwd, sizeof(cwd)) != NULL)
+//    if (outputFd != NULL)
+//    {
+//
+     if (mkDirStatus == 0)
+     {
         
         /* CREATE LEVEL ONE DIRECTORY AND FILES */
         /****************************************/
         
         // Create Where's Waldo Level 1 top directory wherever code is run from on local machine
-        get_dir_lvl1_Paths(cwd, &dirPathLvl1_Breadth, &dirPathLvl1_Depth, &pathLen);
+        //get_dir_lvl1_Paths(cwd, &dirPathLvl1_Breadth, &dirPathLvl1_Depth, &pathLen);
+        get_dir_lvl1_Paths(waldoOutputPath, &dirPathLvl1_Breadth, &dirPathLvl1_Depth, &pathLen);
+
         
         // Remove top level directory, files, children directories, and children files if exists so we can run this program repeatedly
-        check_to_remove_existing_waldo_directories(dirPathLvl1_Breadth, dirPathLvl1_Depth);
+        //check_to_remove_existing_waldo_directories(dirPathLvl1_Breadth, dirPathLvl1_Depth);
+        //check_to_remove_existing_waldo_directories(waldoOutputPath);
+    
+    
         
         // Create top level directories, breadth-first & depth-first
         mkdir(dirPathLvl1_Breadth, 0700);
@@ -135,14 +166,15 @@ int main(int argc, const char * argv[])
         
         // Recursively traverse tree depth-first string searching one text file at a time and logging sightings
         int sightingsDepthCount = 1;
-        log_waldo_sightings_dir_depth_first(dirPathLvl1_Depth, sightingsDepthLogFile, &sightingsDepthCount);
+        int * firstLevel = 1;
+        log_waldo_sightings_dir_depth_first(dirPathLvl1_Depth, sightingsDepthLogFile, &sightingsDepthCount, &firstLevel);
         fclose(sightingsDepthLogFile);
 
         
-    }
+     }
     else
     {
-        perror("getcwd() error");
+        fprintf(stderr, "Error: Failed to create output directory - %s\n", strerror(errno));
     }
     
     return 0;

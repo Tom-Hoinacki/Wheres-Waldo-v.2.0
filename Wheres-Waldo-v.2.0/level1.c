@@ -25,7 +25,7 @@
 
 //Function Signatures
 void get_dir_lvl1_Path(char * cwd, char ** dirPathLvl1, int * pathLen);
-void check_to_remove_existing_waldo_directories(char * dirPathLvl1_Breadth, char * dirPathLvl1_Depth);
+void check_to_remove_existing_waldo_directory(char * outputPath);
 int remove_directory(const char *path);
 void create_log_file(char * dirPathLvl1, char ** logPath, char * logName);
 void create_text_filler_file(char * dirPathLvl1, char ** loremIpsumFilePath, int pathLen);
@@ -69,21 +69,21 @@ void get_dir_lvl1_Paths(char * cwd, char ** dirPathLvl1_Breadth, char ** dirPath
 
 
 /* Checks if a Waldo directory tree already exists in same local drive location, if so remove existing directory tree */
-void check_to_remove_existing_waldo_directories(char * dirPathLvl1_Breadth, char * dirPathLvl1_Depth)
+void check_to_remove_existing_waldo_directory(char * outputPath)
 {
     struct stat st = {0};
     
     // Check if path exists already, if so remove
-    if (stat(dirPathLvl1_Breadth, &st) != -1)
+    if (stat(outputPath, &st) != -1)
     {
-        remove_directory(dirPathLvl1_Breadth);
+        remove_directory(outputPath);
     }
-    
-    // Check if path exists already, if so remove
-    if (stat(dirPathLvl1_Depth, &st) != -1)
-    {
-        remove_directory(dirPathLvl1_Depth);
-    }
+//    
+//    // Check if path exists already, if so remove
+//    if (stat(dirPathLvl1_Depth, &st) != -1)
+//    {
+//        remove_directory(dirPathLvl1_Depth);
+//    }
 }
 
 
