@@ -738,11 +738,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/breadth_sightings.c"
-            timestampString = "491215844.638785"
+            timestampString = "491217532.152414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "log_waldo_sightings_dir_breadth_first()"
             landmarkType = "7">
          </BreakpointContent>
@@ -754,11 +754,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheres-Waldo-v.2.0/breadth_sightings.c"
-            timestampString = "491215844.638785"
+            timestampString = "491217532.152414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "286"
-            endingLineNumber = "286"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
             landmarkName = "log_waldo_sightings_dir_breadth_first()"
             landmarkType = "7">
          </BreakpointContent>

@@ -76,6 +76,11 @@ void breadth_First_Create_First_Parent_Linked_List(char * dirPathLvl1, dirLvlLis
 void allocate_mem_linked_lists_and_paths(void);
 void store_dir_path_to_make_in_node_iterate_next(char * dirPath, int i);
 void reset_to_parent_head_free_currDir_mem(void);
+void add_new_child_node_store_parent_path(void);
+void assign_child_node_to_parent_node(void);
+void transpose_childpath_to_parentpath(void);
+void iterate_to_next_node_in_lists(void);
+
 
 
 
@@ -132,7 +137,7 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
         //*******    CURRENT DIRECTORY LEVEL FOLDER AND FILE CREATION LOOP    *********//
         /*******************************************************************************/
         
-        /* Iterate through parent linked list logging sightings in each directory's text files
+        /* Iterate through parent linked list while logging Waldo sightings in each directory's text files
          * Create and assign child directory level linked list to
          * parent linked list before next directory level iteration of logging sightings
          /************************************************************************************/
@@ -142,16 +147,13 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
         
         while (dirLevelCount > 0)
         {
-            // Iterate all text files in current directory and log sightings
-            struct dirent * in_Dir;
-            DIR * d;
-            struct stat st;
-            
             
             // Open current directory
             d = opendir(parentCurr->path);
             stat(parentCurr->path, &st);
             
+            
+            // Loop through folders and files in directory
             // Log sightings in text files, then add children directory paths to child level linked list
             while ((in_Dir = readdir(d)) != NULL)
             {
@@ -169,7 +171,7 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
                 {
                     log_waldo_sightings_txtfile(parentCurr->path, in_Dir, sightingsLogFile, sightingsCount);
                 }
-                // Esle add directory to child level linked list
+                // Else add directory to child level linked list
                 else if (S_ISDIR(st.st_mode))
                 {
                     // If first iteration assign child head as first element in list
@@ -184,39 +186,12 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
                         childCurr = childCurr->next;
                     }
                     
-                    // If there are any children to create must check to make next level
+                    // If there are any children directories, make linked list node, store parent's path
                     logNextLevel = 1;
                     
-                    
-                    newDirPath = (char *)malloc(PATH_MAX);
-                    tempDirPath = (char *)malloc(PATH_MAX);
-                    strcpy(tempDirPath, parentCurr->path);
-                    strcat(tempDirPath, "/");
-                    strcat(tempDirPath, in_Dir->d_name);
-                    
-                    
-                    // Assign parent folder path
-                    strcpy(newDirPath,tempDirPath);
-                    // sprintf(newDirPath, WALDO_DIR_NAME_FORMAT, tempDirPath, lvlNum, dirNum++);
-                    
-                    char * cPath = (char *)malloc(PATH_MAX);
-                    strcpy(cPath, newDirPath);
-                    
-                    childCurr->path = (char *)malloc(PATH_MAX);
-                    strcpy(childCurr->path, cPath);
-                    
-                    
-                    // Free temp char pointer to path string
-                    free(newDirPath);
-                    free(tempDirPath);
-                    free(cPath);
-                    
-                    newDirPath = NULL;
-                    tempDirPath = NULL;
-                    cPath = NULL;
+                    add_new_child_node_store_parent_path();
                     
                     childCount++;
-                    
                     parentCurr->childDirToCreate--;
                 }
             }
@@ -230,61 +205,26 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
         //*******    LIST USED TO LOG SIGHTINGS FROM NEXT LEVEL TEXT FILES     *********//
         /***************************************************************************/
         
-        
-        // Set linked lists to point to first element
-        parentCurr = parentHead;
-        childCurr = childHead;
-        
         // Set number of child directories to be made in the next level
         dirLevelCount = childCount;
-        firstChild = 1;
         
         // Assign child directory level linked list to parent level linked list before
-        // next level iteration
+        // next level iteration of directory creations
         while (childCount > 0)
         {
-            tempDirPath = (char *)malloc(PATH_MAX);
-            strcpy(tempDirPath, childCurr->path);
-            
-            char * childToParentTemp = (char *)malloc(PATH_MAX);
-            strcpy(childToParentTemp, tempDirPath);
-            
-            //printf(parentCurr->path, childToParentTemp);
-            strcpy(parentCurr->path, childToParentTemp);
-            
-            
             if (firstChild)
             {
                 parentHead = parentCurr;
                 firstChild = 0;
             }
             
-            
-            parentCurr->next = (dirLvlList *)malloc(sizeof(*parentCurr->next));
-            parentCurr->next->path = (char *)malloc(PATH_MAX);
-            
-            // Point to next element in parent and child level linked lists
-            parentCurr = parentCurr->next;
-            
-            if (parentCurr->path == NULL)
-            {
-                parentCurr->path = (char *)malloc(PATH_MAX);
-            }
-            
-            childCurr = childCurr->next;
-            
-            
-            free(tempDirPath);
-            free(childToParentTemp);
-            tempDirPath = NULL;
-            childToParentTemp = NULL;
+            assign_child_node_to_parent_node();
             childCount--;
         }
         
         // Set parent linked list to first element to prepare for creating directories in next level iteration
         parentCurr = parentHead;
         childCurr = childHead;
-        
         firstChild = 1;
     }
     
@@ -309,18 +249,6 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
 //        parentHead = nextElm;
 //    }
     
-//    ListNode * nextElm = (ListNode *)malloc(sizeof(*nextElm));
-//    
-//    while (nextElm != NULL)
-//    {
-//        nextElm = depthList->first->next;
-//        free(depthList->first->parentPath);
-//        free(depthList->first);
-//        depthList->first = nextElm;
-//    }
-//    
-//    free(nextElm);
-//    free(depthList);
     
     // Free variable pointer memory
     free(childHead);
@@ -409,4 +337,67 @@ void reset_to_parent_head_free_currDir_mem()
     free(in_Dir);
     free(d);
 }
+
+void add_new_child_node_store_parent_path()
+{
+    tempDirPath = (char *)malloc(PATH_MAX);
+    newDirPath = (char *)malloc(PATH_MAX);
+    
+    strcpy(tempDirPath, parentCurr->path);
+    strcat(tempDirPath, "/");
+    strcat(tempDirPath, in_Dir->d_name);
+    
+    // Assign parent folder path
+    strcpy(newDirPath,tempDirPath);
+    
+    char * cPath = (char *)malloc(PATH_MAX);
+    strcpy(cPath, newDirPath);
+    
+    strcpy(childCurr->path, cPath);
+    
+    // Free temp char pointer to path string
+    free(newDirPath);
+    free(tempDirPath);
+    free(cPath);
+}
+
+void assign_child_node_to_parent_node()
+{
+    // Transpose child path to parent path
+    transpose_childpath_to_parentpath();
+   
+    // Initialize new next parent node
+    parentCurr->next = (dirLvlList *)malloc(sizeof(*parentCurr->next));
+    parentCurr->next->path = (char *)malloc(PATH_MAX);
+    
+    // Point to next element in parent and child level linked lists
+    iterate_to_next_node_in_lists();
+}
+
+void transpose_childpath_to_parentpath()
+{
+    tempDirPath = (char *)malloc(PATH_MAX);
+    strcpy(tempDirPath, childCurr->path);
+    
+    char * childToParentTemp = (char *)malloc(PATH_MAX);
+    strcpy(childToParentTemp, tempDirPath);
+    strcpy(parentCurr->path, childToParentTemp);
+    
+    free(tempDirPath);
+    free(childToParentTemp);
+}
+
+void iterate_to_next_node_in_lists()
+{
+    parentCurr = parentCurr->next;
+    
+    if (parentCurr->path == NULL)
+    {
+        parentCurr->path = (char *)malloc(PATH_MAX);
+    }
+    
+    childCurr = childCurr->next;
+}
+
+
 
