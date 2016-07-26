@@ -104,6 +104,8 @@ void create_depth_first_random_asym_dir_tree(char * dirPathLvl1, char * creation
     const char * WALDO_FILE_NAME_FORMAT = (char *)malloc(strlen(1 + "%s/File %d.txt"));
     strcpy(WALDO_FILE_NAME_FORMAT, "%s/File %d.txt");
     
+    
+    // Initialize all other local variables
     init_assign_local_vars_before_tree_creation(dirPathLvl1, creationLogPath);
     
     // Seed random number generator for number of directories to be created under each leaf
