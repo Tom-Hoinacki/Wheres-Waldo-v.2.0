@@ -74,26 +74,14 @@ static struct stat st;
 void log_waldo_sightings_dir_breadth_first(char * dirPath, FILE * sightingsLogFile, int * sightingsCount);
 void breadth_First_Create_First_Parent_Linked_List(char * dirPathLvl1, dirLvlList * parentCurr, dirLvlList * parentHead);
 void allocate_mem_linked_lists_and_paths(void);
+void store_dir_path_to_make_in_node_iterate_next(char * dirPath, int i);
+void reset_to_parent_head_free_currDir_mem(void);
+
 
 
 
 // FUNCTION IMPLEMENTATIONS
 //*************************
-
-void allocate_mem_linked_lists_and_paths()
-{
-    newDirPath = (char *)malloc(PATH_MAX);;
-    tempDirPath = (char *)malloc(PATH_MAX);
-    childDirPath = (char *)malloc(PATH_MAX);
-    
-    // Node memory for linked lists, hold path and children to create for each directory
-    parentCurr = (dirLvlList *)malloc(sizeof(*parentCurr));
-    parentHead = (dirLvlList *)malloc(sizeof(*parentHead));
-    childCurr = (dirLvlList *)malloc(sizeof(*childCurr));
-    childHead = (dirLvlList *)malloc(sizeof(*childHead));
-    nextElm = (dirLvlList *)malloc(sizeof(*nextElm));
-}
-
 
 /* LOG SIGHTINGS BREADTH-FIRST IN RANDOM ASYMMETRICAL DIRECTORY TREE */
 /*********************************************************************/
@@ -112,7 +100,6 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
     
     allocate_mem_linked_lists_and_paths();
     
-
     
     /*******    DIRECTORY LEVEL SEARCH LOOP (OUTERMOST LOOP)    ********/
     /*******************************************************************/
@@ -137,67 +124,9 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
         // Initialize child head and current to prepare to add to child linked list
         if (firstLevel)
         {
-            // Save child level directory paths into parent link list
-            int i = 0;
-            
-            // Open current directory
-            d = opendir(dirPathLvl1);
-            stat(dirPathLvl1, &st);
-            
-            // Iterate through child directories
-            while ((in_Dir = readdir(d)) != NULL)
-            {
-                if (strcmp(in_Dir->d_name, ".") == 0 || strcmp(in_Dir->d_name, "..") == 0)
-                    continue;
-                
-                if (fstatat(dirfd(d), in_Dir->d_name, &st, 0) < 0)
-                {
-                    perror(in_Dir->d_name);
-                    continue;
-                }
-                
-                // If file, open file, start string search, else traverse to next child directory
-                if (S_ISDIR(st.st_mode))
-                {
-                   // char * childDirPath = (char *)malloc(PATH_MAX);
-                    strcpy(childDirPath, dirPathLvl1);
-                    strcat(childDirPath, "/");
-                    strcat(childDirPath, in_Dir->d_name);
-                    
-                    parentCurr->path = (char *)malloc(PATH_MAX);
-                    parentCurr->path = childDirPath;
-                    
-                    
-                    // If first element store in head
-                    if (i == 0)
-                    {
-                        parentHead = parentCurr;
-                        char * pHeadPath = (char *)malloc(PATH_MAX);
-                        strcpy(pHeadPath, childDirPath);
-                        parentHead->path = pHeadPath;
-                        i++;
-                    }
-                    
-                    //childDirPath = NULL;
-                   // free(childDirPath);
-                    
-                    parentCurr->next = (dirLvlList *)malloc(sizeof(*parentCurr->next) + 1000);
-                    parentCurr = parentCurr->next;
-                    
-                    dirLevelCount++;
-                }
-                
-            }
-            
-            parentCurr = parentHead;
-            
-            in_Dir = NULL;
-            d = NULL;
-            free(in_Dir);
-            free(d);
-            firstLevel = 0;
+            breadth_First_Create_First_Parent_Linked_List(dirPathLvl1, parentCurr, parentHead);
         }
-        
+
         
         
         //*******    CURRENT DIRECTORY LEVEL FOLDER AND FILE CREATION LOOP    *********//
@@ -251,7 +180,7 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
                     }
                     else
                     {
-                        childCurr->next = (dirLvlList *)malloc(sizeof(*childCurr->next) + 10000);
+                        childCurr->next = (dirLvlList *)malloc(sizeof(*childCurr->next));
                         childCurr = childCurr->next;
                     }
                     
@@ -331,7 +260,7 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
             }
             
             
-            parentCurr->next = (dirLvlList *)malloc(sizeof(*parentCurr->next) + 1000);
+            parentCurr->next = (dirLvlList *)malloc(sizeof(*parentCurr->next));
             parentCurr->next->path = (char *)malloc(PATH_MAX);
             
             // Point to next element in parent and child level linked lists
@@ -361,24 +290,37 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
     
     
     // Free parent and child linked list memory
-    nextElm = childHead;
+//    nextElm = childHead;
+//    
+//    while (nextElm != NULL)
+//    {
+//        nextElm = childHead->next;
+//        free(childHead->path);
+//        free(childHead);
+//        childHead = nextElm;
+//    }
+//    
+//    nextElm = parentHead;
+//    
+//    while (nextElm != NULL)
+//    {
+//       nextElm = parentHead->next;
+//        free(parentHead);
+//        parentHead = nextElm;
+//    }
     
-    while (nextElm != NULL)
-    {
-        nextElm = childHead->next;
-        free(childHead);
-        childHead = nextElm;
-    }
-    
-    struct list_elm * next_parent_elm = parentHead;
-    
-    while (next_parent_elm != NULL)
-    {
-        next_parent_elm = parentHead->next;
-        free(parentHead);
-        parentHead = next_parent_elm;
-    }
-    
+//    ListNode * nextElm = (ListNode *)malloc(sizeof(*nextElm));
+//    
+//    while (nextElm != NULL)
+//    {
+//        nextElm = depthList->first->next;
+//        free(depthList->first->parentPath);
+//        free(depthList->first);
+//        depthList->first = nextElm;
+//    }
+//    
+//    free(nextElm);
+//    free(depthList);
     
     // Free variable pointer memory
     free(childHead);
@@ -388,13 +330,23 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
 }
 
 
+void allocate_mem_linked_lists_and_paths()
+{
+    newDirPath = (char *)malloc(PATH_MAX);;
+    tempDirPath = (char *)malloc(PATH_MAX);
+    childDirPath = (char *)malloc(PATH_MAX);
+    
+    // Node memory for linked lists, hold path and children to create for each directory
+    parentCurr = (dirLvlList *)malloc(sizeof(*parentCurr));
+    parentHead = (dirLvlList *)malloc(sizeof(*parentHead));
+    childCurr = (dirLvlList *)malloc(sizeof(*childCurr));
+    childHead = (dirLvlList *)malloc(sizeof(*childHead));
+    nextElm = (dirLvlList *)malloc(sizeof(*nextElm));
+}
+
+
 void breadth_First_Create_First_Parent_Linked_List(char * dirPathLvl1, dirLvlList * parentCurr, dirLvlList * parentHead)
 {
-    // Save child level directory paths into parent link list
-    struct dirent * in_Dir;
-    DIR * d;
-    struct stat st;
-    
     int i = 0;
     
     // Open current directory
@@ -413,39 +365,43 @@ void breadth_First_Create_First_Parent_Linked_List(char * dirPathLvl1, dirLvlLis
             continue;
         }
         
-        // If file, open file, start string search, else traverse to next child directory
+        // If dir, store path for new directory to be created in parent linked list node,
+        // then allocate memory to next parent node and iterate to next
         if (S_ISDIR(st.st_mode))
         {
-            char * childDirPath = (char *)malloc(PATH_MAX);
-            strcpy(childDirPath, dirPathLvl1);
-            strcat(childDirPath, "/");
-            strcat(childDirPath, in_Dir->d_name);
-            
-            parentCurr->path = (char *)malloc(PATH_MAX);
-            parentCurr->path = childDirPath;
-            
-            
-            // If first element store in head
-            if (i == 0)
-            {
-                parentHead = parentCurr;
-                char * pHeadPath = (char *)malloc(PATH_MAX);
-                strcpy(pHeadPath, childDirPath);
-                parentHead->path = pHeadPath;
-                i++;
-                
-                //logNextLevel = 1;
-            }
-            
-            childDirPath = NULL;
-            free(childDirPath);
-            
-            parentCurr->next = (dirLvlList *)malloc(sizeof(*parentCurr->next) + 1000);
-            parentCurr = parentCurr->next;
+            store_dir_path_to_make_in_node_iterate_next(dirPathLvl1, i);
         }
-        
     }
     
+    reset_to_parent_head_free_currDir_mem();
+}
+
+void store_dir_path_to_make_in_node_iterate_next(char * dirPath, int i)
+{
+    strcpy(tempDirPath, dirPath);
+    strcat(tempDirPath, "/");
+    strcat(tempDirPath, in_Dir->d_name);
+    
+    parentCurr->path = tempDirPath;
+    
+    
+    // If first element store in head
+    if (i == 0)
+    {
+        parentHead = parentCurr;
+        char * pHeadPath = (char *)malloc(PATH_MAX);
+        strcpy(pHeadPath, tempDirPath);
+        parentHead->path = pHeadPath;
+        free(pHeadPath);
+        i++;
+    }
+    
+    parentCurr->next = (dirLvlList *)malloc(sizeof(*parentCurr->next));
+    parentCurr = parentCurr->next;
+}
+
+void reset_to_parent_head_free_currDir_mem()
+{
     // reset head and free memory
     parentCurr = parentHead;
     in_Dir = NULL;
@@ -453,3 +409,4 @@ void breadth_First_Create_First_Parent_Linked_List(char * dirPathLvl1, dirLvlLis
     free(in_Dir);
     free(d);
 }
+
