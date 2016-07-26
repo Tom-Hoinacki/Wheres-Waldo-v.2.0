@@ -58,225 +58,185 @@ void create_depth_first_random_asym_dir_tree(char * dirPathLvl1, char * creation
     char * parentDirName = (char *) malloc(strlen(WALDO_DIR_NAME_FORMAT));
     char * newDirPath = (char *) malloc (PATH_MAX);
     char * newFilePath = (char *) malloc(PATH_MAX);
-    char * dirPathLvl2 = (char *) malloc(1 + strlen(dirPathLvl1) + WALDO_DIR_NAME_LEN);
     
-//    typedef enum
-//    {
-//        FIRST_CHILD_LEVEL,
-//        MIDDLE_LEVEL,
-//        LAST_LEVEL
-//    } levelType;
+    // Initialize traversal path linked list
+    //http://c.learncodethehardway.org/book/ex32.html
+    struct ListNode;
+    
+    typedef struct ListNode {
+        struct ListNode * next;
+        struct ListNode * prev;
+        char * parentPath;
+    } ListNode;
+    
+    typedef struct List {
+        int count;
+        ListNode * first;
+        ListNode * last;
+    } List;
 
-    //levelType level = FIRST_CHILD_LEVEL;
+    ListNode * currDir;
+    List * depthList;
+    
+    // Initilize linked list to keep track of parent paths to traverse up directory tree
+    depthList = (List *)malloc(sizeof(*depthList));
+    depthList->first = (ListNode *)malloc(sizeof(*depthList->first));
+    depthList->last = (ListNode *)malloc(sizeof(*depthList->last));
+    depthList->last->parentPath = (char *)malloc(PATH_MAX);
+    
+    // Set first linked list node
+    depthList->first = depthList->last;
+    
+    // Set current linked list node with level path parameter
+    char * tempDirPath = (char *)malloc(PATH_MAX);
+    strcpy(tempDirPath, dirPathLvl1);
+    strcpy(depthList->last->parentPath, tempDirPath);
+
+    // Initialize top level, max level, and current level
     const int FIRST_CHILD_LVL = 2;
     const int LEVEL_MAX = 4;
-    const int TOTAL_CHILD_LEVELS = 3;
     int lvlNum = 2;
-    
-    // Initialize children directory level path identity numbers
-    int firstChildLevel = 1;
-    int middleLevel = 1;
-    int lastLevel = 1;
     
     // Seed random number generator
     srand(time(NULL));
     
-    
     // Number of directories left at corresponding index to level value
-    int numDirToMakeAtLvl[10];
+    int numDirToMakeAtLvl[LEVEL_MAX + 1];
     numDirToMakeAtLvl[lvlNum] = rand() % 3 + 1;
-    
     
     // Current directory number to make next at a given level
     int currDirNumAtLvl[10];
     currDirNumAtLvl[lvlNum] = 1;
-
     
     // Initialize number of files left to create in a child directory (random 1-3)
     int filesToCreate;
     int fileNum;
     
-    // Initialize parent directory path
-    char * parentPath = (char *) malloc(PATH_MAX);
-    strcpy(parentPath, dirPathLvl1);
-    
-    char * grandParentPath = (char *) malloc(PATH_MAX);
-    
-    
+   
+
     
     /* RECURSIVE DEPTH-FIRST ALGORITHM, FIRST CREATES AT LEAST ONE           */
     /* LEVEL 2 DIRECTORY, RANDOMIZES CREATION OF CHILD DIRECTORIES AND FILES */
     /*************************************************************************/
-    
-    
-    // While there directories left to be made keep creating
-//    while (moreDirToCreate)
-//    {
-//        moreDirToCreate = 0;
-    
-        // Switch to create directory at specified level
-//        switch (level)
-//        {
-//                // Waldo Level 2 Directories
-//            case FIRST_CHILD_LEVEL:
-//                
-//                // If level 2 directory is to be created
-//                if (numDirToMakeAtLvl[lvlNum] > 0)
-//                {
-//                    // Create new level 2 directory
-//                    strcpy(parentPath, dirPathLvl1);
-//                    sprintf(newDirPath, WALDO_DIR_NAME_FORMAT, parentPath, lvlNum, currDirNumAtLvl[lvlNum]++);
-//                    mkdir(newDirPath, 0700);
-//                    
-//                    // Log directory creation path
-//                    log_creation_path(creationLogFile, newDirPath);
-//                    
-//                    // Get random num 1-3 and create that number of empty text files in new directory
-//                    create_rand3_file_num(newFilePath, newDirPath, creationLogFile, loremIpsumFilePath, WALDO_FILE_NAME_FORMAT);
-//                    
-//                    // Save new parent path for next level down directory creation
-//                    strcpy(parentPath, newDirPath);
-//                    
-//                    numDirToMakeAtLvl[lvlNum]--;
-//                    
-//                    // Get number of directories to create for next level down
-//                    numDirToMakeAtLvl[++lvlNum] = rand() % 4;
-//                    
-//                    // Find which level is the next to have a directory be created, specify that level to navigate to for next loop iteration
-//                    if (numDirToMakeAtLvl[lvlNum] > 0)
-//                    {
-//                        moreDirToCreate = 1;
-//                        currDirNumAtLvl[lvlNum] = 1;
-//                        level = MIDDLE_LEVEL;
-//                        
-//                        // Save parent path for directory level 3
-//                        strcpy(dirPathLvl2, newDirPath);
-//                    }
-//                    else if (numDirToMakeAtLvl[--lvlNum]> 0)
-//                    {
-//                        continue;
-//                    }
-//                }
-//                
-//                break;
+   
+    while (numDirToMakeAtLvl[lvlNum] >= 0)
+    {
+        // If no dir to create on first child level break, creation of tree is done
+        if ((lvlNum == FIRST_CHILD_LVL) && (numDirToMakeAtLvl[lvlNum] == 0))
+        {
+            break;
+        }
         
-            // Waldo Middle Level Directorys (number of level greater than 2, less than infinite)
-            //case MIDDLE_LEVEL:
-    
-                strcpy(parentPath, dirPathLvl1);
-                strcpy(grandParentPath, parentPath);
-    
-                while (numDirToMakeAtLvl[lvlNum] >= 0)
-                {
-                    // Create level 3 directory
-                    sprintf(newDirPath, WALDO_DIR_NAME_FORMAT, parentPath, lvlNum, currDirNumAtLvl[lvlNum]++);
-                    mkdir(newDirPath, 0700);
-                    
-                    // Log directory creation path
-                    log_creation_path(creationLogFile, newDirPath);
-                    
-                    numDirToMakeAtLvl[lvlNum]--;
-                    
-                    // Get random num 1-3 and create that number of empty text files in new directory
-                    create_rand3_file_num(newFilePath, newDirPath, creationLogFile, loremIpsumFilePath, WALDO_FILE_NAME_FORMAT);
-                    
-                    // Check next level won't exceed max
-                    if ((lvlNum + 1) > LEVEL_MAX)
-                    {
-                        // Check if current level has more siblings
-                        if (numDirToMakeAtLvl[lvlNum] > 0)
-                        {
-                            continue;
-                        }
-                        // Else go back to parent level
-                        else
-                        {
-                            strcpy(parentPath, grandParentPath);
-                            lvlNum--;
-                        }
-                    }
-                    // Check next level is not first or last level
-                    else if ((lvlNum + 1) > FIRST_CHILD_LVL && (lvlNum + 1) <= LEVEL_MAX)
-                    {
-                        // Get how many children direct children directories are to be created
-                        numDirToMakeAtLvl[++lvlNum] = rand() % 4;
-                        currDirNumAtLvl[lvlNum] = 1;
+        // If no dir to create on current level, go up to parent level if the
+        if ((lvlNum > FIRST_CHILD_LVL) && (numDirToMakeAtLvl[lvlNum] == 0))
+        {
+            depthList->last = depthList->last->prev;
+            lvlNum--;
+            continue;
+        }
+        
+        // Create level 3 directory
+        sprintf(newDirPath, WALDO_DIR_NAME_FORMAT, depthList->last->parentPath, lvlNum, currDirNumAtLvl[lvlNum]++);
+        mkdir(newDirPath, 0700);
+        
+        // Log directory creation path
+        log_creation_path(creationLogFile, newDirPath);
+        
+        numDirToMakeAtLvl[lvlNum]--;
+        
+        // Get random num 1-3 and create that number of empty text files in new directory
+        create_rand3_file_num(newFilePath, newDirPath, creationLogFile, loremIpsumFilePath, WALDO_FILE_NAME_FORMAT);
+        
+        // Check next level won't exceed max
+        if ((lvlNum + 1) > LEVEL_MAX)
+        {
+            // Check if current level has more siblings
+            if (numDirToMakeAtLvl[lvlNum] > 0)
+            {
+                continue;
+            }
+            // Else go back to parent level
+            else
+            {
+               // currDir = depthList->last->prev;
+                depthList->last = depthList->last->prev;
+                lvlNum--;
+            }
+        }
+        // Check next level is not first or last level
+        else if ((lvlNum + 1) > FIRST_CHILD_LVL && (lvlNum + 1) <= LEVEL_MAX)
+        {
+            // Get how many children direct children directories are to be created
+            numDirToMakeAtLvl[++lvlNum] = rand() % 4;
+            currDirNumAtLvl[lvlNum] = 1;
 
-                        // Check if there are children directories to be made
-                        if (numDirToMakeAtLvl[lvlNum] > 0)
-                        {
-                            // Save parent directory path
-                            strcpy(parentPath, newDirPath);
-                            strcpy(grandParentPath, parentPath);
-                        }
-                        // Else stay to iterate through siblings on current level
-                        else
-                        {
-                            lvlNum++;
-                        }
-                    }
-                    // Check if more siblings to create
-                    else if (numDirToMakeAtLvl[lvlNum] > 0)
-                    {
-                        continue;
-                    }
-                    // Else traverse back up to parent directory
-                    else
-                    {
-                        strcpy(parentPath, grandParentPath);
-                        lvlNum--;
-                    }
-                }
+            // Check if there are children directories to be made
+            if (numDirToMakeAtLvl[lvlNum] > 0)
+            {
+                char * temp = malloc(PATH_MAX);
+                strcpy(temp, newDirPath);
                 
-                //break;
+                depthList->last->next = (ListNode *)malloc(sizeof(*depthList->last->next));
+                depthList->last->next->parentPath = (char *)malloc(PATH_MAX);
                 
-            // Waldo Level 4 Directories
-//            case 4:
-//                
-//                dirNumLvl4 = 1;
-//                
-//                // Since it is the last directory level, loop and create directories until complete
-//                while (mkDirLvl4 > 0)
-//                {
-//                    sprintf(newDirPath, WALDO_DIR_NAME_FORMAT, parentPath, lvlNum, dirNumLvl4++);
-//                    mkdir(newDirPath, 0700);
-//                    
-//                    // Log directory creation path
-//                    log_creation_path(creationLogFile, newDirPath);
-//                    
-//                    mkDirLvl4--;
-//                    
-//                    // Get random num 1-3 and create that number of empty text files in new directory
-//                    create_rand3_file_num(newFilePath, newDirPath, creationLogFile, loremIpsumFilePath, WALDO_FILE_NAME_FORMAT);
-//                }
-//                
-//                
-//                // Check if the parent directory has any siblings that need to be created
-//                if (mkDirLvl3 > 0)
-//                {
-//                    lvlNum = 3;
-//                    strcpy(parentPath, dirPathLvl2);
-//                }
-//                // Parent has no siblings left to be create recurse back to grandparent
-//                else
-//                {
-//                    lvlNum = 2;
-//                }
-//                
-//                break;
-        //}
-    //}
+                // Assign next linked list element with
+                strcpy(depthList->last->next->parentPath, temp);
+                
+                free(temp);
+                
+                depthList->last->next->prev = depthList->last;
+                depthList->last = depthList->last->next;
+            }
+            // Else stay to iterate through siblings on current level
+            else
+            {
+                lvlNum--;
+            }
+        }
+        // Check if more siblings to create
+        else if (numDirToMakeAtLvl[lvlNum] > 0)
+        {
+            continue;
+        }
+        // Else traverse back up to parent directory
+        else
+        {
+            currDir = depthList->last->prev;
+            depthList->last = depthList->last->prev;
+            lvlNum--;
+        }
+    }
+    
+    // Free memory of linked lists
+    ListNode *nextElm = (ListNode *)malloc(sizeof(*nextElm));
+//    
+//    while (nextElm != NULL)
+//    {
+//        nextElm = depthList->first->next;
+//        //free(depthList->first->parentPath);
+//        free(depthList->first);
+//        depthList->first = nextElm;
+//    }
+//    struct list_elm * next_parent_elm = parentHead;
+//    
+//    while (next_parent_elm != NULL)
+//    {
+//        next_parent_elm = parentHead->next;
+//        free(parentHead->path);
+//        free(parentHead);
+//        parentHead = next_parent_elm;
+//    }
+//    
+
     
     // Free memory of all pointers used for random asymmetrical directory tree creation
     free(WALDO_DIR_NAME_FORMAT);
     free(WALDO_FILE_NAME_FORMAT);
     free(parentDirName);
-    free(parentPath);
     free(newDirPath);
     free(newFilePath);
-    free(dirPathLvl2);
     
-    // Close creation log file, free point
+    // Close creation log file, free pointer
     if (creationLogFile != NULL)
     {
         fclose(creationLogFile);

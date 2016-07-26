@@ -150,8 +150,6 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
                         strcpy(pHeadPath, childDirPath);
                         parentHead->path = pHeadPath;
                         i++;
-                        
-                        //logNextLevel = 1;
                     }
                     
                     childDirPath = NULL;

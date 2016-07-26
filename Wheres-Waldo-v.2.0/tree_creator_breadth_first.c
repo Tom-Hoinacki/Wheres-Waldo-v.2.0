@@ -231,8 +231,6 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
                 
                 // Reset directory number for each next set of sibling child folders to be made
                 dirNum = 1;
-            
-
                 
                 while (parentCurr->childDirToCreate > 0)
                 {
@@ -248,9 +246,6 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
                         childCurr = childCurr->next;
 
                     }
-                    
-
-                    
 
                     // If there are any children to create must check to make next level
                     createNextLevel = 1;
@@ -258,8 +253,6 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
                     // Get random 0-3 grandchildren directories to be created
                     childCurr->childDirToCreate = random() % 4;
                     //childCurr->childDirToCreate = 3;
-                    
-                    
                     
                     newDirPath = (char *)malloc(PATH_MAX);
                     tempDirPath = (char *)malloc(PATH_MAX);
@@ -326,7 +319,6 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
             char * childToParentTemp = (char *)malloc(PATH_MAX);
             strcpy(childToParentTemp, tempDirPath);
             
-            //printf(parentCurr->path, childToParentTemp);
             strcpy(parentCurr->path, childToParentTemp);
            
             
