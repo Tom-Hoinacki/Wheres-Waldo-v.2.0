@@ -26,6 +26,7 @@
 #include "tree_creator_breadth_first.h"
 #include "tree_creator_depth_first.h"
 #include "sightings_log.h"
+#include "breadth_sightings.h"
 
 
 

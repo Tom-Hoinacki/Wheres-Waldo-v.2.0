@@ -30,12 +30,12 @@
 
 
 
-// FILE VARIABLES
+// FILE SCOPE VARIABLES
 //***************
 
 // Initialize traversal path node struct and doubly linked list
 //http://c.learncodethehardway.org/book/ex32.html
-struct ListNode;
+static struct ListNode;
 
 typedef struct ListNode {
     struct ListNode * next;
@@ -49,26 +49,26 @@ typedef struct List {
     ListNode * last;
 } List;
 
-List * depthList;
+static List * depthList;
 
 // Initialize path string holders and formats
-char * newDirPath;
-char * newFilePath;
-char * tempDirPath;
+static char * newDirPath;
+static char * newFilePath;
+static char * tempDirPath;
 
 // Initialize top level, max level, and current level
-const int FIRST_CHILD_LVL = 2;
-const int LEVEL_MAX = 4;
-int lvlNum = 2;
+static const int FIRST_CHILD_LVL = 2;
+static const int LEVEL_MAX = 4;
+static int lvlNum = 2;
 
 // Number of directories left to create at a given level
-int numDirToMakeAtLvl[LEVEL_MAX + 1];
+static int numDirToMakeAtLvl[LEVEL_MAX + 1];
 
 // Current directory number to make next at a given level
-int currDirNumAtLvl[LEVEL_MAX + 1];
+static int currDirNumAtLvl[LEVEL_MAX + 1];
 
 // Create log file pointer
-FILE * creationLogFile;
+static FILE * creationLogFile;
 
 
 
@@ -76,10 +76,10 @@ FILE * creationLogFile;
 //********************
 void create_depth_first_random_asym_dir_tree(char * dirPathLvl1, char * creationLogPath, char * loremIpsumFilePath);
 void initialize_traversal_path_linked_list(char * dirPathLvl1);
-void initialize_new_path_vars();
+void initialize_new_path_vars(void);
 void init_assign_local_vars_before_tree_creation(char * dirPathLvl1, char * creationLogPath);
 void create_new_dir_and_text_files_log_creation(char * textFillerPath, const char * dirNameFormat, const char * fileNameFormat);
-void iterate_init_assign_next_path_linked_list_node();
+void iterate_init_assign_next_path_linked_list_node(void);
 void free_memory_and_close_creation_log(FILE * creationLogFile, const char * dirNameFormat, const char * fileNameFormat);
 void free_linked_list(List * depthList);
 void free_path_and_format_vars(const char * dirNameFormat, const char * fileNameFormat);
