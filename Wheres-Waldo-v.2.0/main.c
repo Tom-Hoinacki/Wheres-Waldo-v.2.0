@@ -63,7 +63,7 @@ int main(int argc, const char * argv[])
     FILE * outputFd;
     int mkDirStatus;
     char * waldoOutputPath = (char *)malloc(PATH_MAX);
-    strcpy(waldoOutputPath, "/Users/Tommy/Desktop/Wheres-Waldo-Output");
+    strcpy(waldoOutputPath, "/Users/Tommy/Desktop/Wheres-Waldo-Output2");
     
     // Remove same named directory and all its folders and files if already exists
     check_to_remove_existing_waldo_directory(waldoOutputPath);
@@ -81,7 +81,7 @@ int main(int argc, const char * argv[])
         get_dir_lvl1_Paths(waldoOutputPath, &dirPathLvl1_Breadth, &dirPathLvl1_Depth, &pathLen);
 
         // Create Level 1 directories
-        //mkdir(dirPathLvl1_Breadth, 0700);
+        mkdir(dirPathLvl1_Breadth, 0700);
         mkdir(dirPathLvl1_Depth, 0700);
 
         // Create directory creation and sightings log files in Level 1 directories
@@ -110,8 +110,8 @@ int main(int argc, const char * argv[])
         /*********************************************************************************************************/
 
         // BREADTH-FIRST RANDOM ASYMMETRICAL DIRECTORY TREE CREATION
-//        create_breadth_first_random_asym_dir_tree(dirPathLvl1_Breadth, createBreadthLogPath, loremIpsumFilePath);
-//        free(createBreadthLogPath);
+        create_breadth_first_random_asym_dir_tree(dirPathLvl1_Breadth, createBreadthLogPath, loremIpsumFilePath);
+        free(createBreadthLogPath);
 
         // DEPTH-FIRST RANDOM ASYMMETRICAL DIRECTORY TREE CREATION
         create_depth_first_random_asym_dir_tree(dirPathLvl1_Depth, createDepthLogPath, loremIpsumFilePath);
@@ -123,19 +123,19 @@ int main(int argc, const char * argv[])
         /* STRING SEARCH EACH TEXT FILE FOR "Waldo" OCCURENCES                          */
         /********************************************************************************/
 
-        // (BREADTH-FIRST) Open log file as writable
-//        FILE * sightingsBreadthLogFile = fopen(sightingsBreadthLogPath, "w");
-//
-//        if (sightingsBreadthLogFile == NULL)
-//        {
-//            fprintf(stderr, "Error: Failed to open sightingsBreadthLogFile - %s\n", strerror(errno));
-//            return 1;
-//        }
-//
-//        // Traverse tree depth-first string searching one text file at a time and logging sightings
-//        log_waldo_sightings_dir_breadth_first(dirPathLvl1_Breadth, sightingsBreadthLogFile, &sightingsBreadthCount);
-//        fclose(sightingsBreadthLogFile);
-//        free(sightingsBreadthLogPath);
+        //(BREADTH-FIRST) Open log file as writable
+        FILE * sightingsBreadthLogFile = fopen(sightingsBreadthLogPath, "w");
+
+        if (sightingsBreadthLogFile == NULL)
+        {
+            fprintf(stderr, "Error: Failed to open sightingsBreadthLogFile - %s\n", strerror(errno));
+            return 1;
+        }
+
+        // Traverse tree depth-first string searching one text file at a time and logging sightings
+        log_waldo_sightings_dir_breadth_first(dirPathLvl1_Breadth, sightingsBreadthLogFile, &sightingsBreadthCount);
+        fclose(sightingsBreadthLogFile);
+        free(sightingsBreadthLogPath);
         
 
         // (DEPTH-FIRST) Open sightings log file as writable

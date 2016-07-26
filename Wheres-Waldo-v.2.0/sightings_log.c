@@ -22,11 +22,8 @@
 
 #include "sightings_log.h"
 
-//Function Signatures
-void log_waldo_sightings_dir_breadth_first(char * dirPath, FILE * sightingsLogFile, int * sightingsCount);
-void log_waldo_sightings_dir_depth_first(char * dirPath, FILE * sightingsLogFile, int * sightingsCount, int * firstLevel);
-void log_waldo_sightings_txtfile(char* dirPath, struct dirent* in_File, FILE * sightingsLogFile, int * sightingsCount);
 
+// File Variables
 
 //http://www.macs.hw.ac.uk/~rjp/Coursewww/Cwww/linklist.html
 struct list_elm {
@@ -38,7 +35,16 @@ struct list_elm {
 typedef struct list_elm dirLvlList;
 
 
-//Function Implementations
+// Function Signatures
+void log_waldo_sightings_dir_breadth_first(char * dirPath, FILE * sightingsLogFile, int * sightingsCount);
+void breadth_First_Create_First_Parent_Linked_List(char * dirPathLvl1, dirLvlList * parentCurr, dirLvlList * parentHead);
+void log_waldo_sightings_dir_depth_first(char * dirPath, FILE * sightingsLogFile, int * sightingsCount, int * firstLevel);
+void log_waldo_sightings_txtfile(char* dirPath, struct dirent* in_File, FILE * sightingsLogFile, int * sightingsCount);
+
+
+
+
+// Function Implementations
 
 
 /* LOG SIGHTINGS BREADTH-FIRST IN RANDOM ASYMMETRICAL DIRECTORY TREE */
@@ -340,7 +346,6 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
     while (nextElm != NULL)
     {
         nextElm = childHead->next;
-        //free(childHead->path);
         free(childHead);
         childHead = nextElm;
     }
@@ -350,7 +355,6 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
     while (next_parent_elm != NULL)
     {
         next_parent_elm = parentHead->next;
-        //free(parentHead->path);
         free(parentHead);
         parentHead = next_parent_elm;
     }

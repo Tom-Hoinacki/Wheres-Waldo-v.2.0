@@ -73,13 +73,13 @@ void get_output_path(char * outputDir, char ** dirPathLvl1, char * name,  int * 
     free(name);
 }
 
+
 void build_path_string(char ** path, int * len, char * outputDir, char * name)
 {
     *path = (char *)malloc(*len);
     strcpy(*path, outputDir);
     strcat(*path, name);
 }
-
 
 
 /* Checks if a Waldo directory tree already exists in same local drive location, if so remove existing directory tree */
@@ -176,7 +176,7 @@ void create_log_file(char * dirPathLvl1, char ** logPath, char * logName)
     strcat(*logPath, logName);
     
     // Create log file with path, close after creation
-    FILE* fd = fopen(*logPath, "w+");
+    FILE * fd = fopen(*logPath, "w+");
     
     // Close file
     if(fd != NULL)
