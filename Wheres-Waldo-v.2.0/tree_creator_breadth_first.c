@@ -28,9 +28,46 @@
 #include "file_creator.h"
 
 
-// FILE VARIABLES
+// FILE SCOPE VARIABLES
 //***************
-FILE * bCreationLogFile;
+static FILE * creationLogFile;
+
+
+static const int WALDO_DIR_NAME_LEN = 13;
+
+// Initialize children directory level counters for how many children directory
+//left to create at that level (random 1-3 for Level 2, random 0-3 for Levels 3 & 4)
+static int mkDirCount;
+static int dirsToCreate;
+static int childCounter;
+
+// First child flag
+int firstChild = 1;
+
+static int lvlNum = 2;// Initilaize number for first child directory level 2, used for creating path strings
+static int createNextLevel = 1; // Initialize flag for whether to create next level down
+static int dirNum; // Initialize number of current child directory being created
+static char * newDirPath; // Initialize new directory path
+static char * newFilePath;  // Initialize new file path
+static char * tempDirPath; // Initialize directory path temp
+
+
+// Create empty linked list
+//http://www.macs.hw.ac.uk/~rjp/Coursewww/Cwww/linklist.html
+struct list_elm {
+    int childDirToCreate;
+    char * path;
+    struct list_elm * next;
+};
+
+typedef struct list_elm dirLvlList;
+
+// Parent and child level linked list node pointers
+static dirLvlList * parentCurr, * parentHead;
+static dirLvlList * childCurr, * childHead;
+static dirLvlList * nextElm;
+
+
 
 
 // FUNCTION SIGNATURES
@@ -39,9 +76,9 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
 
 
 
+
 // FUNCTION IMPLEMENTATIONS
 //*************************
-
 
 /* CREATE BREADTH-FIRST RANDOM ASYMMETRICAL CHILD DIRECTORY TREE
  * RANDOM BETWEEN 2-4 LEVELS OF CHILD DEPTH
@@ -54,10 +91,9 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
     //*******    LOCAL VARIABLES    *********//
     /*****************************************/
     // Open creation log file
-    bCreationLogFile = fopen(creationLogPath, "ab+");
+    creationLogFile = fopen(creationLogPath, "ab+");
    
     // Initialize directory path variables
-    const int WALDO_DIR_NAME_LEN = 13;
     
     char * const WALDO_DIR_NAME_FORMAT = (char *)malloc(strlen(1 + "%s/Level %d-%d"));
     strcpy(WALDO_DIR_NAME_FORMAT, "%s/Level %d-%d");
@@ -65,53 +101,24 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
     char * const WALDO_FILE_NAME_FORMAT = (char *)malloc(strlen(1 + "%s/File %d.txt"));
     strcpy(WALDO_FILE_NAME_FORMAT, "%s/File %d.txt");
 
-
+    mkDirCount = rand() % 3 + 1;
+    dirsToCreate = mkDirCount;
+    childCounter = 0;
+    
     // Seed random number generator
     srand(time(NULL));
 
-
-    // Initialize children directory level counters for how many children directory
-    //left to create at that level (random 1-3 for Level 2, random 0-3 for Levels 3 & 4)
-    int mkDirCount = rand() % 3 + 1;
-    //int mkDirCount= 3;
-    int dirsToCreate = mkDirCount;
-    int childCounter = 0;
-
-
-    int lvlNum = 2;// Initilaize number for first child directory level 2, used for creating path strings
-    int createNextLevel = 1; // Initialize flag for whether to create next level down
-    int dirNum; // Initialize number of current child directory being created
-    char * newDirPath = (char *)malloc(PATH_MAX);; // Initialize new directory path
-    char * newFilePath = (char *)malloc(PATH_MAX);;  // Initialize new file path
-    char * tempDirPath = (char *)malloc(PATH_MAX); // Initialize directory path temp
-
-
-    // Create empty linked list
-    //http://www.macs.hw.ac.uk/~rjp/Coursewww/Cwww/linklist.html
-    struct list_elm {
-        int childDirToCreate;
-        char * path;
-        struct list_elm * next;
-    };
+    newDirPath = (char *)malloc(PATH_MAX); // Initialize new directory path
+    newFilePath = (char *)malloc(PATH_MAX);;  // Initialize new file path
+    tempDirPath = (char *)malloc(PATH_MAX); // Initialize directory path temp
     
-    typedef struct list_elm dirLvlList;
-
-    dirLvlList * parentCurr, * parentHead;
-    dirLvlList * childCurr, * childHead;
-    dirLvlList * nextElm;
-
     parentCurr = (dirLvlList *)malloc(sizeof(*parentCurr));
     parentHead = (dirLvlList *)malloc(sizeof(*parentHead));
-
     childCurr = (dirLvlList *)malloc(sizeof(*childCurr));
     childHead = (dirLvlList *)malloc(sizeof(*childHead));
-
-    int firstChild = 1;
-
+    
     nextElm = (dirLvlList *)malloc(sizeof(*nextElm));
-
-
-
+   
 
     //*******    DIRECTORY LEVEL CREATION LOOP (OUTERMOST LOOP)    *********//
     /*******************************************************************/
@@ -131,9 +138,7 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
         // children to create
         createNextLevel = 0;
        
-        
-        
-        
+
         //*******    CREATE FIRST PARENT DIRECTORY LEVEL LINKED LIST                         *********//
         //*******    STORES PATHS FOR FOLDER CREATION AND CHILD DIRECTORIES TO BE CREATED    *********//
         /**********************************************************************************************/
@@ -209,7 +214,7 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
             mkdir(parentCurr->path, 0700);
             
             // Log directory creation path
-            log_creation_path(bCreationLogFile, parentCurr->path);
+            log_creation_path(creationLogFile, parentCurr->path);
             
             newDirPath = (char *)malloc(PATH_MAX);
             
@@ -217,7 +222,7 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
             //strcpy(tempDirPath, newDirPath);
             
             // Create rand 3 files, write to with text filler file and random "Waldo" insertions
-            create_rand3_file_num(newFilePath, newDirPath, bCreationLogFile, loremIpsumFilePath, WALDO_FILE_NAME_FORMAT);
+            create_rand3_file_num(newFilePath, newDirPath, creationLogFile, loremIpsumFilePath, WALDO_FILE_NAME_FORMAT);
             
             
             
@@ -322,12 +327,10 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
             tempDirPath = (char *)malloc(PATH_MAX);
             strcpy(tempDirPath, childCurr->path);
             
-            char * childToParentTemp = (char *)malloc(PATH_MAX);
-            strcpy(childToParentTemp, tempDirPath);
-            
-            strcpy(parentCurr->path, childToParentTemp);
+            char * swapTemp = (char *)malloc(PATH_MAX);
+            strcpy(swapTemp, tempDirPath);
+            strcpy(parentCurr->path, swapTemp);
            
-            
             if (firstChild)
             {
                 parentHead = parentCurr;
@@ -349,10 +352,9 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
 
             
             free(tempDirPath);
-            free(childToParentTemp);
+            free(swapTemp);
             tempDirPath = NULL;
-            childToParentTemp = NULL;
-
+            swapTemp = NULL;
         }
         
         // Set parent linked list to first element to prepare for creating directories in next level iteration
@@ -391,9 +393,9 @@ void create_breadth_first_random_asym_dir_tree(char * dirPathLvl1, char * creati
     free(newFilePath);
     
     // Close creation log file, free point
-    if (bCreationLogFile != NULL)
+    if (creationLogFile != NULL)
     {
-        fclose(bCreationLogFile);
+        fclose(creationLogFile);
     }
 }
 

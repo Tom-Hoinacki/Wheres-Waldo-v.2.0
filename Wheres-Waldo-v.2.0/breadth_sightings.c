@@ -44,6 +44,8 @@ typedef struct list_elm dirLvlList;
 // Create linked list pointers to point to parent and child level lists
 static dirLvlList * parentCurr, * parentHead;
 static dirLvlList * childCurr, * childHead;
+
+//TODO: change to local variable for memory clearing
 static dirLvlList * nextElm;
 
 
@@ -72,11 +74,12 @@ static struct stat st;
 // FUNCTION SIGNATURES
 //********************
 void log_waldo_sightings_dir_breadth_first(char * dirPath, FILE * sightingsLogFile, int * sightingsCount);
-void breadth_First_Create_First_Parent_Linked_List(char * dirPathLvl1, dirLvlList * parentCurr, dirLvlList * parentHead);
+void breadth_first_create_first_parent_linked_list(char * dirPathLvl1, dirLvlList * parentCurr, dirLvlList * parentHead);
 void allocate_mem_linked_lists_and_paths(void);
 void store_dir_path_to_make_in_node_iterate_next(char * dirPath, int i);
 void reset_to_parent_head_free_currDir_mem(void);
-void add_new_child_node_store_parent_path(void);
+void allocate_and_iterate_to_next_child_node(void);
+void store_parent_path_to_next_child_node(void);
 void assign_child_node_to_parent_node(void);
 void transpose_childpath_to_parentpath(void);
 void iterate_to_next_node_in_lists(void);
@@ -97,10 +100,10 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
     
     // Initialize directory path variables
     const char * WALDO_DIR_NAME_FORMAT = (char *)malloc(strlen(1 + "%s/Level %d-%d"));
-    strcpy(WALDO_DIR_NAME_FORMAT, "%s/Level %d-%d");
+    strncpy(WALDO_DIR_NAME_FORMAT, "%s/Level %d-%d", PATH_MAX);
     
     const char * WALDO_FILE_NAME_FORMAT = (char *)malloc(strlen(1 + "%s/File %d.txt"));
-    strcpy(WALDO_FILE_NAME_FORMAT, "%s/File %d.txt");
+    strncpy(WALDO_FILE_NAME_FORMAT, "%s/File %d.txt", PATH_MAX);
     
     
     allocate_mem_linked_lists_and_paths();
@@ -109,12 +112,17 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
     /*******    DIRECTORY LEVEL SEARCH LOOP (OUTERMOST LOOP)    ********/
     /*******************************************************************/
     
-    /* Search child directory levels using a parent and child level linked lists
-     * Search parent directory level folders while making a parent linked list
-     * Iterate through each parent linked list element to log sightings and child directories to
-     * child level linked list
-     * Once parent directory is done logging sightings from its texts files,
-     * Assign child link list to parent list link list before next iteration */
+    /* Search for Waldo sightings by using a parent and child directory level linked lists to map out the
+     * text file order to search through and log sightings. Each linked list item holds the text file path to search for sightings.
+     *
+     * Iterate through each parent linked list item that holds the text file path to log sightings into log file, while also creating
+     * child directory level linked list items that store the text file paths for each child text file of the current parent linked list
+     * item. This newly assigned child directory level linked list will be used in the next iteration.
+     *
+     * At end of each parent directory level sightings log iteration, assign entire child level linked list items to
+     * replace entire parent level linked list in order to prepare for next search sightings log iteration.
+     */
+    
     while (logNextLevel)
     {
         // Set log next level to false, unless child level found
@@ -129,7 +137,7 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
         // Initialize child head and current to prepare to add to child linked list
         if (firstLevel)
         {
-            breadth_First_Create_First_Parent_Linked_List(dirPathLvl1, parentCurr, parentHead);
+            breadth_first_create_first_parent_linked_list(dirPathLvl1, parentCurr, parentHead);
         }
 
         
@@ -182,14 +190,13 @@ void log_waldo_sightings_dir_breadth_first(char * dirPathLvl1, FILE * sightingsL
                     }
                     else
                     {
-                        childCurr->next = (dirLvlList *)malloc(sizeof(*childCurr->next));
-                        childCurr = childCurr->next;
+                        allocate_and_iterate_to_next_child_node();
                     }
                     
                     // If there are any children directories, make linked list node, store parent's path
                     logNextLevel = 1;
                     
-                    add_new_child_node_store_parent_path();
+                    store_parent_path_to_next_child_node();
                     
                     childCount++;
                     parentCurr->childDirToCreate--;
@@ -273,7 +280,7 @@ void allocate_mem_linked_lists_and_paths()
 }
 
 
-void breadth_First_Create_First_Parent_Linked_List(char * dirPathLvl1, dirLvlList * parentCurr, dirLvlList * parentHead)
+void breadth_first_create_first_parent_linked_list(char * dirPathLvl1, dirLvlList * parentCurr, dirLvlList * parentHead)
 {
     int i = 0;
     
@@ -297,68 +304,80 @@ void breadth_First_Create_First_Parent_Linked_List(char * dirPathLvl1, dirLvlLis
         // then allocate memory to next parent node and iterate to next
         if (S_ISDIR(st.st_mode))
         {
-            store_dir_path_to_make_in_node_iterate_next(dirPathLvl1, i);
+            store_dir_path_to_make_in_node_iterate_next(dirPathLvl1, i++);
         }
     }
     
     reset_to_parent_head_free_currDir_mem();
 }
 
+
+/* Saves directory path for next node to create */
 void store_dir_path_to_make_in_node_iterate_next(char * dirPath, int i)
 {
-    strcpy(tempDirPath, dirPath);
+    char * tempDirPath = malloc(PATH_MAX);
+    strncpy(tempDirPath, dirPath, PATH_MAX);
     strcat(tempDirPath, "/");
     strcat(tempDirPath, in_Dir->d_name);
     
-    parentCurr->path = tempDirPath;
+    parentCurr->path = malloc(PATH_MAX);
+    strncpy(parentCurr->path, tempDirPath, PATH_MAX);
     
     
     // If first element store in head
     if (i == 0)
     {
         parentHead = parentCurr;
-        char * pHeadPath = (char *)malloc(PATH_MAX);
-        strcpy(pHeadPath, tempDirPath);
-        parentHead->path = pHeadPath;
-        free(pHeadPath);
-        i++;
     }
     
     parentCurr->next = (dirLvlList *)malloc(sizeof(*parentCurr->next));
     parentCurr = parentCurr->next;
+    
+    dirLevelCount++;
 }
 
 void reset_to_parent_head_free_currDir_mem()
 {
     // reset head and free memory
     parentCurr = parentHead;
-    in_Dir = NULL;
-    d = NULL;
     free(in_Dir);
     free(d);
+    in_Dir = NULL;
+    d = NULL;
+   
 }
 
-void add_new_child_node_store_parent_path()
+//TODO: change to single line strncpy child to parent
+void store_parent_path_to_next_child_node()
 {
     tempDirPath = (char *)malloc(PATH_MAX);
     newDirPath = (char *)malloc(PATH_MAX);
     
-    strcpy(tempDirPath, parentCurr->path);
+    strncpy(tempDirPath, parentCurr->path, PATH_MAX);
+    //TODO: try change strcat to strncat
     strcat(tempDirPath, "/");
     strcat(tempDirPath, in_Dir->d_name);
     
     // Assign parent folder path
-    strcpy(newDirPath,tempDirPath);
+    strncpy(newDirPath,tempDirPath, PATH_MAX);
     
     char * cPath = (char *)malloc(PATH_MAX);
-    strcpy(cPath, newDirPath);
+    strncpy(cPath, newDirPath, PATH_MAX);
     
-    strcpy(childCurr->path, cPath);
+    childCurr->path = (char *)malloc(PATH_MAX);
+    strncpy(childCurr->path, cPath, PATH_MAX);
     
     // Free temp char pointer to path string
     free(newDirPath);
     free(tempDirPath);
     free(cPath);
+}
+
+void allocate_and_iterate_to_next_child_node()
+{
+    childCurr->next = (dirLvlList *)malloc(sizeof(*childCurr->next));
+    childCurr->next->path = (char *)malloc(PATH_MAX);
+    childCurr = childCurr->next;
 }
 
 void assign_child_node_to_parent_node()
@@ -376,14 +395,16 @@ void assign_child_node_to_parent_node()
 
 void transpose_childpath_to_parentpath()
 {
-    tempDirPath = (char *)malloc(PATH_MAX);
-    strcpy(tempDirPath, childCurr->path);
+    char * tmpPath = (char *)malloc(PATH_MAX);
+    strcpy(tmpPath, childCurr->path);
     
     char * childToParentTemp = (char *)malloc(PATH_MAX);
-    strcpy(childToParentTemp, tempDirPath);
-    strcpy(parentCurr->path, childToParentTemp);
+    strncpy(childToParentTemp, tmpPath, PATH_MAX);
+    parentCurr->path = (char *)malloc(PATH_MAX);
+    strncpy(parentCurr->path, childToParentTemp, PATH_MAX);
     
-    free(tempDirPath);
+    free(tmpPath);
+    tmpPath = NULL;
     free(childToParentTemp);
 }
 

@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 
-void get_dir_lvl1_Paths(char * currentWorkingDirectory, char ** dirPathLvl1_Breadth, char ** dirPathLvl1_Depth, int * pathLen);
+void get_dir_lvl1_Paths(char * currentWorkingDirectory, char ** dirPathLvl1_Breadth, char ** dirPathLvl1_Depth);
 
 void check_to_remove_existing_waldo_directory(char * outputPath);
 

@@ -24,7 +24,7 @@
 #include "level1.h"
 
 //Header Function Signatures
-void get_dir_lvl1_Path(char * outputDir, char ** dirPathLvl1, int * pathLen);
+void get_dir_lvl1_Paths(char * outputDir, char ** dirPathLvl1_Breadth, char ** dirPathLvl1_Depth);
 void check_to_remove_existing_waldo_directory(char * outputPath);
 int remove_directory(const char *path);
 void create_log_file(char * dirPathLvl1, char ** logPath, char * logName);
@@ -42,22 +42,26 @@ void build_path_string(char ** path, int * len, char * outputDir, char * name);
 //Function Implementations
 
 /* Creates Waldo Level 1 folder */
-void get_dir_lvl1_Paths(char * outputDir, char ** dirPathLvl1_Breadth, char ** dirPathLvl1_Depth, int * pathLen)
+void get_dir_lvl1_Paths(char * outputDir, char ** dirPathLvl1_Breadth, char ** dirPathLvl1_Depth)
 {
     // Create breadth dir level 1 name
     char * dirNameLvl1Breadth = (char *)malloc(strlen(1 + "/Breadth-First Level 1"));
-    strcpy(dirNameLvl1Breadth, "/Breadth-First Level 1");
+    strncpy(dirNameLvl1Breadth, "/Breadth-First Level 1", PATH_MAX);
     
-    // Get breadth dir level 1 path
-    get_output_path(outputDir, dirPathLvl1_Breadth, dirNameLvl1Breadth, pathLen);
+    // Form full breadth directory path
+    strncpy(*dirPathLvl1_Breadth, outputDir, PATH_MAX);
+    strcat(*dirPathLvl1_Breadth, dirNameLvl1Breadth);
+    free(dirNameLvl1Breadth);
     
     
     // Create depth dir level 1 name
     char * dirNameLvl1Depth = (char *)malloc(strlen(1 + "/Depth-First Level 1"));
     strcpy(dirNameLvl1Depth, "/Depth-First Level 1");
     
-    // Get depth dir level 1 path
-    get_output_path(outputDir, dirPathLvl1_Depth, dirNameLvl1Depth, pathLen);
+    // Form full depth directory path
+    strncpy(*dirPathLvl1_Depth, outputDir, PATH_MAX);
+    strcat(*dirPathLvl1_Depth, dirNameLvl1Depth);
+    free(dirNameLvl1Depth);
 }
 
 void get_output_path(char * outputDir, char ** dirPathLvl1, char * name,  int * pathLen)
@@ -206,7 +210,7 @@ void create_text_filler_file(char * waldoOutputPath, char ** loremIpsumFilePath,
     strcpy(loremIpsumFileName, "/_Lorem Ipsum Text Filler.txt");
     
     // Allocate memory for text filler file path, build and assign file path
-    *loremIpsumFilePath = (char *) malloc(1+ pathLen + strlen(loremIpsumFileName));
+    *loremIpsumFilePath = (char *)malloc(PATH_MAX);
     strcpy(*loremIpsumFilePath, waldoOutputPath);
     strcat(*loremIpsumFilePath, loremIpsumFileName);
     

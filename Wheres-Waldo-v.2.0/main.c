@@ -36,7 +36,8 @@ int main(int argc, const char * argv[])
     
     // Main Local Variables
     char cwd[1024];// cwd: current working directory
-    char * dirPathLvl1_Breadth, * dirPathLvl1_Depth;
+    char * dirPathLvl1_Breadth = (char *)malloc(PATH_MAX);
+    char * dirPathLvl1_Depth = (char *)malloc(PATH_MAX);
     int pathLen;
     char * loremIpsumFilePath; // text filler file path
     
@@ -79,7 +80,7 @@ int main(int argc, const char * argv[])
         /****************************************************************************/
 
         // Create Where's Waldo Level 1 directory paths for breadth and depth traversals
-        get_dir_lvl1_Paths(waldoOutputPath, &dirPathLvl1_Breadth, &dirPathLvl1_Depth, &pathLen);
+        get_dir_lvl1_Paths(waldoOutputPath, &dirPathLvl1_Breadth, &dirPathLvl1_Depth);
 
         // Create Level 1 directories
         mkdir(dirPathLvl1_Breadth, 0700);
